@@ -86,6 +86,12 @@ inline Camera2D createCamera(int width, int height, int radius) {
     };
 }
 
+Texture2D *LoadTextures() {
+    Texture2D *result = malloc(sizeof(Texture2D) * 9) = {
+        
+    }
+}
+
 void play(enum state *state) {
     Color color = { .r = 100, .g = 100, .b = 100, .a = 255 };
     Color color2 = { .r = 78, .g = 215, .b = 50, .a = 255 };
@@ -95,7 +101,7 @@ void play(enum state *state) {
     int radius = 16;
 
     Image image = LoadImage("resources/Fais/floor.png");
-    Texture2D podloga = LoadTextureFromImage(image);
+    Texture2D* podloga = LoadTextures();
     UnloadImage(image);
     struct GridTile **grid = allocGridTile(&width, &height, &podloga, NULL, radius);
     Camera2D camera = createCamera(width, height, radius);
