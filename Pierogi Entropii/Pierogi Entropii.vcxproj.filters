@@ -33,6 +33,9 @@
     <ClCompile Include="drawMenuElement.c">
       <Filter>Pliki źródłowe\additions\drawMenuElement</Filter>
     </ClCompile>
+    <ClCompile Include="play.c">
+      <Filter>Pliki źródłowe\state</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="state.h">

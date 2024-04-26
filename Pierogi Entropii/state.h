@@ -15,5 +15,6 @@ inline void clickAndChangeState(enum state *state, const char *text, int frontSi
 }
 
 void menu(enum state *state);
+void play(enum state *state);
 
 #endif

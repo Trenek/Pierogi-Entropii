@@ -9,6 +9,7 @@ int main(void) {
     enum state state = MENU;
     void (*function[])(enum state *state) = {
         [MENU] = menu,
+        [PLAY] = play
     };
 
 #ifdef FULLSCREEN

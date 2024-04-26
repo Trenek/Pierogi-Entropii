@@ -144,6 +144,7 @@
     <ClCompile Include="drawMenuElement.c" />
     <ClCompile Include="menu.c" />
     <ClCompile Include="Pierogi Entropii.c" />
+    <ClCompile Include="play.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="drawMenuElement.h" />
