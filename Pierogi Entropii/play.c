@@ -25,13 +25,12 @@ struct GridTile **allocGridTile(int *width, int *height, Texture2D *texture, con
     int i = 0;
     int j = 0;
     int k = 0;
-    int m = 0;
 
     while (i < *height) {
         result[i] = malloc(sizeof(struct GridTile) * *width);
         j = 0;
         while (j < *width) {
-            fscanf(f, "%i %i", &k, &m);
+            fscanf(f, "%i", &k);
             result[i][j] = (struct GridTile){
                 .color = { (unsigned char)rand(), (unsigned char)rand(), (unsigned char)rand(), 255 },
                 .coordinates = {.x = j * radius, .y = i * radius },
@@ -89,7 +88,7 @@ inline Camera2D createCamera(int width, int height, int radius) {
 }
 
 Texture2D *LoadFloor(void) {
-    Texture2D *result = malloc(sizeof(Texture2D) * 9);
+    Texture2D *result = malloc(sizeof(Texture2D) * 13);
 
     result[0] = LoadTexture("resources/Fais/floor.png");
     result[1] = LoadTexture("resources/Fais/upperWall.png");
@@ -100,6 +99,10 @@ Texture2D *LoadFloor(void) {
     result[6] = LoadTexture("resources/Fais/rightUpperWall.png");
     result[7] = LoadTexture("resources/Fais/leftLowerWall.png");
     result[8] = LoadTexture("resources/Fais/rightLowerWall.png");
+    result[9] = LoadTexture("resources/DrzwiPrawe.png");
+    result[10] = LoadTexture("resources/DrzwiDolne.png");
+    result[11] = LoadTexture("resources/DrzwiLewe.png");
+    result[12] = LoadTexture("resources/DrzwiGora.png");
 
     return result;
 }
