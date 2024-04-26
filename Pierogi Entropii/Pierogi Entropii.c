@@ -16,7 +16,7 @@ int example2(void) {
 #endif
 
     while (!WindowShouldClose()) {
-        // lol3
+        // lol4
     }
 
     CloseAudioDevice();         // Close audio device (music streaming is automatically stopped)
