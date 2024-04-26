@@ -36,6 +36,9 @@
     <ClCompile Include="play.c">
       <Filter>Pliki źródłowe\state</Filter>
     </ClCompile>
+    <ClCompile Include="pause.c">
+      <Filter>Pliki źródłowe\state</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="state.h">

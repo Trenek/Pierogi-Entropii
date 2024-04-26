@@ -17,24 +17,26 @@ struct GridTile {
 };
 
 struct GridTile **allocGridTile(int *width, int *height, Texture2D *texture, const char *file, int radius) {
-    *width = 30;
-    *height = 30;
+    FILE *f = fopen(file, "r");
+    fscanf(f, "%i%i", height, width);
     srand((unsigned int)time(NULL));
 
     struct GridTile **result = malloc(sizeof(struct GridTile *) * *height);
     int i = 0;
     int j = 0;
+    int k = 0;
+    int m = 0;
 
     while (i < *height) {
         result[i] = malloc(sizeof(struct GridTile) * *width);
         j = 0;
         while (j < *width) {
+            fscanf(f, "%i %i", &k, &m);
             result[i][j] = (struct GridTile){
-                //.color = RED,
                 .color = { (unsigned char)rand(), (unsigned char)rand(), (unsigned char)rand(), 255 },
-                .coordinates = {.x = i * radius, .y = j * radius },
+                .coordinates = {.x = j * radius, .y = i * radius },
                 .object = NULL,
-                .texture = texture
+                .texture = texture + k
             };
 
             j += 1;
@@ -86,24 +88,30 @@ inline Camera2D createCamera(int width, int height, int radius) {
     };
 }
 
-Texture2D *LoadTextures() {
-    Texture2D *result = malloc(sizeof(Texture2D) * 9) = {
-        
-    }
+Texture2D *LoadFloor(void) {
+    Texture2D *result = malloc(sizeof(Texture2D) * 9);
+
+    result[0] = LoadTexture("resources/Fais/floor.png");
+    result[1] = LoadTexture("resources/Fais/upperWall.png");
+    result[2] = LoadTexture("resources/Fais/lowerWall.png");
+    result[3] = LoadTexture("resources/Fais/leftWall.png");
+    result[4] = LoadTexture("resources/Fais/rightWall.png");
+    result[5] = LoadTexture("resources/Fais/leftUpperWall.png");
+    result[6] = LoadTexture("resources/Fais/rightUpperWall.png");
+    result[7] = LoadTexture("resources/Fais/leftLowerWall.png");
+    result[8] = LoadTexture("resources/Fais/rightLowerWall.png");
+
+    return result;
 }
 
 void play(enum state *state) {
     Color color = { .r = 100, .g = 100, .b = 100, .a = 255 };
-    Color color2 = { .r = 78, .g = 215, .b = 50, .a = 255 };
-    Color color3 = { .r = 78, .g = 215, .b = 50, .a = 105 };
     int width = 8;
     int height = 10;
     int radius = 16;
 
-    Image image = LoadImage("resources/Fais/floor.png");
-    Texture2D* podloga = LoadTextures();
-    UnloadImage(image);
-    struct GridTile **grid = allocGridTile(&width, &height, &podloga, NULL, radius);
+    Texture2D* podloga = LoadFloor();
+    struct GridTile **grid = allocGridTile(&width, &height, podloga, "stage/1.txt", radius);
     Camera2D camera = createCamera(width, height, radius);
     RenderTexture screenCamera1 = LoadRenderTexture(GetScreenWidth(), GetScreenHeight() + 20);
     Rectangle splitScreenRect = { 0.0f, 0.0f, (float)screenCamera1.texture.width, (float)-screenCamera1.texture.height };
@@ -121,11 +129,10 @@ void play(enum state *state) {
         BeginDrawing();
             ClearBackground(color);
             DrawTextureRec(screenCamera1.texture, splitScreenRect, (Vector2) { 0, 0 }, WHITE);
-            drawMenuElement("Menu", 20, GetScreenWidth() >> 1, GetScreenHeight() >> 1, 10, 10, &color2, &color3);
         EndDrawing();
 
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            clickAndChangeState(state, "Menu", 20, GetScreenWidth() >> 1, GetScreenHeight() >> 1, 10, 10, MENU);
+        if (IsKeyPressed(KEY_P)) {
+            Pause(state, PLAY, &screenCamera1, &splitScreenRect);
         }
         camera.zoom += (GetMouseWheelMove() * camera.zoom / 16);
     }
