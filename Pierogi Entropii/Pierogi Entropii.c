@@ -1,11 +1,15 @@
 ﻿// raylib.cpp : Ten plik zawiera funkcję „main”. W nim rozpoczyna się i kończy wykonywanie programu.
 //
 
+#include <stdio.h>
 #include <raylib.h>
 
 #include "state.h"
 
+//#define FULLSCREEN
+
 int main(void) {
+    printf("%s", GetWorkingDirectory());
     enum state state = MENU;
     void (*function[])(enum state *state) = {
         [MENU] = menu,
