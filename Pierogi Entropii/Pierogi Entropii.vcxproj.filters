@@ -13,10 +13,36 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Pliki źródłowe\state">
+      <UniqueIdentifier>{3f54b36c-23b9-4fd5-a3bb-0cbe5ff2b3c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\additions">
+      <UniqueIdentifier>{cc83d095-6a86-4fbe-adf3-47872b9f7e11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\additions\drawMenuElement">
+      <UniqueIdentifier>{71412e68-78df-46b5-a819-c505efa47b07}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Pierogi Entropii.c">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="menu.c">
+      <Filter>Pliki źródłowe\state</Filter>
+    </ClCompile>
+    <ClCompile Include="drawMenuElement.c">
+      <Filter>Pliki źródłowe\additions\drawMenuElement</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="state.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="drawMenuElement.h">
+      <Filter>Pliki źródłowe\additions\drawMenuElement</Filter>
+    </ClInclude>
+    <ClInclude Include="isMouseInRange.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

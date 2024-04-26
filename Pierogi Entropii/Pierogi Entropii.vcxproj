@@ -108,6 +108,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
+      <DisableSpecificWarnings>5045</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,6 +129,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
+      <DisableSpecificWarnings>5045</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,7 +141,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="drawMenuElement.c" />
+    <ClCompile Include="menu.c" />
     <ClCompile Include="Pierogi Entropii.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="drawMenuElement.h" />
+    <ClInclude Include="isMouseInRange.h" />
+    <ClInclude Include="state.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
