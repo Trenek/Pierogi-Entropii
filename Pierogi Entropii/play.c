@@ -115,8 +115,8 @@ void play(enum state *state) {
                 //DrawText(TextFormat("%i", map[num].grid[interY][interX].interactableID), 0, 0, 20, WHITE);
                 switch (map[num].grid[interY][interX].interactableID) {
                     case 1:
-                        DrawRectangle(GetScreenWidth() / 2 - 100, GetScreenHeight() - 100, 200, 50, GREEN);
-                        DrawText("Przeszukaj skrzynke", GetScreenWidth() / 2 - 80, GetScreenHeight() - 80, 20, WHITE);
+                        DrawRectangle(GetScreenWidth() / 2 - 150, GetScreenHeight() - 50, 300, 50, GREEN);
+                        DrawText("Przeszukaj skrzynke", (GetScreenWidth() - MeasureText("Przeszukaj skrzynke", 20)) / 2, GetScreenHeight() - 30, 20, WHITE);
                         if (IsKeyPressed(KEY_X)) {
                             if (map[num].grid[interY][interX].exit > 0) {
                                 player.pierogi[0] += map[num].grid[interY][interX].exit;
@@ -132,15 +132,16 @@ void play(enum state *state) {
                                 do {
                                     BeginDrawing();
                                     ClearBackground(RED);
-                                    DrawText("NIE DLA PSA!!!", (GetScreenWidth() - MeasureText("NIE DLA PSA!!!", 50)) / 2, (GetScreenHeight() - 50) / 2, 50, WHITE);
+                                    DrawText("Z pustego i Salomon nie naleje", (GetScreenWidth() - MeasureText("Z pustego i Salomon nie naleje", 50)) / 2, (GetScreenHeight() - 50) / 2, 50, WHITE);
                                     EndDrawing();
                                 } while (GetKeyPressed() == 0);
                             }
                         }
                         break;
                     case 2:
-                        DrawRectangle(GetScreenWidth() / 2 - 100, GetScreenHeight() - 100, 200, 50, GREEN);
-                        DrawText("Go to other stage", GetScreenWidth() / 2 - 80, GetScreenHeight() - 80, 20, WHITE);
+                        DrawRectangle(GetScreenWidth() / 2 - 150, GetScreenHeight() - 50, 300, 50, GREEN);
+                        DrawText(TextFormat("Go to stage %i", map[num].grid[interY][interX].exit), (GetScreenWidth() - MeasureText(TextFormat("Go to stage %i", map[num].grid[interY][interX].exit), 20)) / 2, GetScreenHeight() - 30, 20, WHITE);
+
                         if (IsKeyPressed(KEY_X)) {
                             map[num].position = player.coordinates;
                             map[num].camera = createCamera(map[num].width, map[num].height, radius);
