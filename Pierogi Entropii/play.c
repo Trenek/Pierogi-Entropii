@@ -143,7 +143,7 @@ void play(enum state *state) {
                         DrawText("Go to other stage", GetScreenWidth() / 2 - 80, GetScreenHeight() - 80, 20, WHITE);
                         if (IsKeyPressed(KEY_X)) {
                             map[num].position = player.coordinates;
-                            map[num].camera = createCamera(width, height, radius);
+                            map[num].camera = createCamera(map[num].width, map[num].height, radius);
                             num = map[num].grid[interY][interX].exit;
                             if (is[num] == 0) {
                                 is[num] = 1;
@@ -186,7 +186,7 @@ void play(enum state *state) {
         if (IsKeyPressed(KEY_Q)) {
             isCentered = !isCentered;
             if (!isCentered) {
-                map[num].camera = createCamera(width, height, radius);
+                map[num].camera = createCamera(map[num].width, map[num].height, radius);
             }
         }
         if (IsKeyDown(KEY_W)) {
