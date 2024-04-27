@@ -199,7 +199,7 @@ void play(enum state *state) {
                             else {
                                 player.coordinates = map[num].position;
                             }
-                            player.coordinates = grid[interY][interX].expectedCoordinates;
+                           // player.coordinates = grid[interY][interX].expectedCoordinates;
                             interact = false;
                         }
                         break;
