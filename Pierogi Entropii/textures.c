@@ -41,7 +41,7 @@ Texture2D *LoadFloor(void) {
 }
 
 Texture2D *LoadProps(void) {
-    Texture2D *result = malloc(sizeof(Texture2D) * 23);
+    Texture2D *result = malloc(sizeof(Texture2D) * 29);
 
     result[0] = LoadTexture("resources/Props/table.png");
     result[1] = LoadTexture("resources/Props/chair.png");
@@ -66,6 +66,12 @@ Texture2D *LoadProps(void) {
     result[20] = LoadTexture("resources/Props/stolmonitor.png");
     result[21] = LoadTexture("resources/Props/stolmonitor2.png");
     result[22] = LoadTexture("resources/Props/stolowkastol.png");
+    result[23] = LoadTexture("resources/Props/lodowa.png");
+    result[24] = LoadTexture("resources/Props/sofatyl1.png");
+    result[25] = LoadTexture("resources/Props/sofatyl2.png");
+    result[26] = LoadTexture("resources/Props/sofaprawo1.png");
+    result[27] = LoadTexture("resources/Props/sofaprawo2.png");
+    result[28] = LoadTexture("resources/Props/szafaprawo.png");
 
     return result;
 }
