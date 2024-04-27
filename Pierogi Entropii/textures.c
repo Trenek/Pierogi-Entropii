@@ -41,11 +41,13 @@ Texture2D *LoadFloor(void) {
 }
 
 Texture2D *LoadProps(void) {
-    Texture2D *result = malloc(sizeof(Texture2D) * 3);
+    Texture2D *result = malloc(sizeof(Texture2D) * 5);
 
     result[0] = LoadTexture("resources/Props/table.png");
     result[1] = LoadTexture("resources/Props/chair.png");
     result[2] = LoadTexture("resources/Props/shelf.png");
+    result[3] = LoadTexture("resources/Props/plant1.png");
+    result[4] = LoadTexture("resources/Props/plant2.png");
 
     return result;
 }
