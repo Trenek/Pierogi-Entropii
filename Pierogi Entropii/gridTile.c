@@ -62,6 +62,9 @@ struct GridTile **allocGridTile(int *width, int *height, Texture2D *texture[], c
             if (k != 0) {
                 result[i][j].interactable = texture[2] + k - 1;
                 result[i][j].interactableID = k;
+                if (k == 1) {
+                    result[i][j].exit = k;
+                }
             }
 
             j += 1;

@@ -7,6 +7,7 @@ struct player {
     Vector2 coordinates;
     Texture2D *texture;
     int orientation;
+    int pierogi;
 };
 
 #endif

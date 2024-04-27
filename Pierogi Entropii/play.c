@@ -67,7 +67,7 @@ void play(enum state *state) {
         LoadClickable(),
         LoadCollectable()
     };
-    struct player player = { .orientation = 0, .texture = LoadPlayer() };
+    struct player player = { .orientation = 0, .texture = LoadPlayer(), .pierogi = 0 };
 
 
     struct map *realMap = malloc(sizeof(struct map) * 10);
@@ -103,13 +103,33 @@ void play(enum state *state) {
         BeginDrawing();
             ClearBackground(color);
             DrawTextureRec(screenCamera1.texture, splitScreenRect, (Vector2) { 0, 0 }, WHITE);
-            DrawText(TextFormat("%.2f %.2f", player.coordinates.x, player.coordinates.y), 0, 0, 20, VIOLET);
+            DrawText(TextFormat("LICZBA PIEROGOW - %i", player.pierogi), 0, 0, 20, WHITE);
             if (interact) {
                 //DrawText(TextFormat("%i", map[num].grid[interY][interX].interactableID), 0, 0, 20, WHITE);
                 switch (map[num].grid[interY][interX].interactableID) {
                     case 1:
                         DrawRectangle(GetScreenWidth() / 2 - 100, GetScreenHeight() - 100, 200, 50, GREEN);
-                        DrawText("Go to other stage", GetScreenWidth() / 2 - 80, GetScreenHeight() - 80, 20, WHITE);
+                        DrawText("Przeszukaj skrzynke", GetScreenWidth() / 2 - 80, GetScreenHeight() - 80, 20, WHITE);
+                        if (IsKeyPressed(KEY_X)) {
+                            if (map[num].grid[interY][interX].exit > 0) {
+                                player.pierogi += map[num].grid[interY][interX].exit;
+                                map[num].grid[interY][interX].exit = 0;
+                                do {
+                                    BeginDrawing();
+                                    ClearBackground(BROWN);
+                                    DrawText("ZNALAZLES PIEROGA!!!", 0, 0, 50, WHITE);
+                                    EndDrawing();
+                                } while (GetKeyPressed() == 0);
+                            }
+                            else {
+                                do {
+                                    BeginDrawing();
+                                    ClearBackground(BROWN);
+                                    DrawText("NIE DLA PSA!!!", 0, 0, 50, WHITE);
+                                    EndDrawing();
+                                } while (GetKeyPressed() == 0);
+                            }
+                        }
                         break;
                     case 2:
                         DrawRectangle(GetScreenWidth() / 2 - 100, GetScreenHeight() - 100, 200, 50, GREEN);
@@ -157,9 +177,11 @@ void play(enum state *state) {
                 player.coordinates.y -= 0.01f;
                 if (map[num].grid[y][x1].collectable != NULL) {
                     map[num].grid[y][x1].collectable = NULL;
+                    player.pierogi += 1;
                 }
                 if (map[num].grid[y][x2].collectable != NULL) {
                     map[num].grid[y][x2].collectable = NULL;
+                    player.pierogi += 1;
                 }
 
                 if (map[num].grid[y][x1].interactable != NULL) {
@@ -185,10 +207,12 @@ void play(enum state *state) {
                 player.coordinates.y += 0.01f;
                 if (map[num].grid[y][x1].collectable != NULL) {
                     map[num].grid[y][x1].collectable = NULL;
+                    player.pierogi += 1;
                 }
 
                 if (map[num].grid[y][x2].collectable != NULL) {
                     map[num].grid[y][x2].collectable = NULL;
+                    player.pierogi += 1;
                 }
 
                 if (map[num].grid[y][x1].interactable != NULL) {
@@ -214,10 +238,12 @@ void play(enum state *state) {
                 player.coordinates.x += 0.01f;
                 if (map[num].grid[y][x1].collectable != NULL) {
                     map[num].grid[y][x1].collectable = NULL;
+                    player.pierogi += 1;
                 }
 
                 if (map[num].grid[y][x2].collectable != NULL) {
                     map[num].grid[y][x2].collectable = NULL;
+                    player.pierogi += 1;
                 }
 
                 if (map[num].grid[y][x1].interactable != NULL) {
@@ -243,10 +269,12 @@ void play(enum state *state) {
                 player.coordinates.x -= 0.01f;
                 if (map[num].grid[y][x1].collectable != NULL) {
                     map[num].grid[y][x1].collectable = NULL;
+                    player.pierogi += 1;
                 }
 
                 if (map[num].grid[y][x2].collectable != NULL) {
                     map[num].grid[y][x2].collectable = NULL;
+                    player.pierogi += 1;
                 }
 
                 if (map[num].grid[y][x1].interactable != NULL) {
