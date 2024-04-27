@@ -61,7 +61,6 @@ const char * const znaleziska[] = {
     "ZNALAZLES BANANA Z WORMSOW!!!",
     "ZNALAZLES JAJO Z WASEM!!!",
     "ZNALAZLES BOZA KIELBASE MAJORA!!!",
-    "ZNALAZLES PAPAJA!!!",
     "ZNALAZLES PLYTE Z PYTHONEM!!!",
     "ZNALAZLES RYBE KTORA SMIERDZI (WCALE NIE!)!!!",
     "ZNALAZLES PAPIER TOALETOWY!!!",
@@ -73,15 +72,16 @@ const char * const znaleziska[] = {
     "ZNALAZLES DZIEKANA LEKARSKIEGO!!!",
     "ZNALAZLES DZIEKANA WMiIUJ!!!",
     "ZNALAZLES DZIEKANA POLONISTYKI!!!",
+    "ZNALAZLES UNITY"
 };
 
 void play(enum state *state) {
+    extern time_t lifetime;
     Color color = { .r = 100, .g = 100, .b = 100, .a = 255 };
     int width = 8;
     int height = 10;
     int radius = 16;
     time_t start = time(NULL);
-    time_t lifetime = 5 * 60;
 
     Texture *tekstury[] = {
         LoadFloor(),

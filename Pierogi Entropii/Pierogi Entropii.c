@@ -7,12 +7,14 @@
 #include "state.h"
 
 //#define FULLSCREEN
+time_t lifetime = 0;
 
 int main(void) {
     printf("%s", GetWorkingDirectory());
     enum state state = MENU;
     void (*function[])(enum state *state) = {
         [MENU] = menu,
+        [TIME] = timeMenu,
         [PLAY] = play
     };
 

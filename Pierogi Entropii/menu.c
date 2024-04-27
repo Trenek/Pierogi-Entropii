@@ -20,7 +20,7 @@ void menu(enum state *state) {
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            clickAndChangeState(state, "Play", 20, GetScreenWidth() >> 1, GetScreenHeight() >> 1, 10, 10, PLAY);
+            clickAndChangeState(state, "Play", 20, GetScreenWidth() >> 1, GetScreenHeight() >> 1, 10, 10, TIME);
             clickAndChangeState(state, "Exit", 20, GetScreenWidth() >> 1, (GetScreenHeight() >> 1) + 200, 10, 10, EXIT);
         }
     }

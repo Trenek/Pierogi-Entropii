@@ -7,6 +7,7 @@
 enum state {
     MENU,
     PLAY,
+    TIME,
     PAUSE,
     EQUIPMENT,
     EXIT
@@ -19,6 +20,7 @@ inline void clickAndChangeState(enum state *state, const char *text, int frontSi
 
 void menu(enum state *state);
 void play(enum state *state);
+void timeMenu(enum state *state);
 void Pause(enum state *state, enum state resumeState, RenderTexture *screenCamera1, Rectangle *splitScreenRect);
 void equipment(enum state *state, enum state resumeState, RenderTexture *screenCamera1, Rectangle *splitScreenRect, struct player player);
 void endScreen(enum state *state, enum state resumeState, RenderTexture *screenCamera1, Rectangle *splitScreenRect, struct player player);

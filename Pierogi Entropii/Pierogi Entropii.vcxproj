@@ -149,6 +149,7 @@
     <ClCompile Include="Pierogi Entropii.c" />
     <ClCompile Include="play.c" />
     <ClCompile Include="textures.c" />
+    <ClCompile Include="time.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="drawMenuElement.h" />
