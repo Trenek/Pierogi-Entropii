@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="drawMenuElement.c" />
+    <ClCompile Include="equipment.c" />
     <ClCompile Include="gridTile.c" />
     <ClCompile Include="menu.c" />
     <ClCompile Include="pause.c" />
