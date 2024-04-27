@@ -28,7 +28,7 @@ Texture2D *LoadFloor(void) {
     result[9] = LoadTexture("resources/Fundamenty/DrzwiPrawe.png");
     result[10] = LoadTexture("resources/Fundamenty/DrzwiDolne.png");
     result[11] = LoadTexture("resources/Fundamenty/DrzwiLewe.png");
-    result[12] = LoadTexture("resources/Fundamenty/DrzwiGora.png");
+    result[12] = LoadTexture("resources/Fundamenty/DrzwiGorne.png");
     result[13] = LoadTexture("resources/Fundamenty/OknoDolne.png");
     result[14] = LoadTexture("resources/Fundamenty/OknoGora.png");
     result[15] = LoadTexture("resources/Fundamenty/PodlogaHolDark.png");
