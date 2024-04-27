@@ -78,14 +78,14 @@ void endScreen(enum state *state, enum state resumeState, RenderTexture *screenC
         drawMenuElement(TextFormat("Dziekan Matematyki - %i", player.pierogi[14]), 20, GetScreenWidth() >> 1, 15 * GetScreenHeight() >> 5, 10, 10, NULL, NULL);
         drawMenuElement(TextFormat("Dziekan Polonistyki - %i", player.pierogi[15]), 20, GetScreenWidth() >> 1, 16 * GetScreenHeight() >> 5, 10, 10, NULL, NULL);
 
-        drawMenuElement("Kliknij klawisz spacji aby kontytuowac", 40, GetScreenWidth() >> 2, 3 * GetScreenHeight() >> 2, 0, 0, NULL, NULL);
-        DrawText("Kliknij klawisz spacji aby kontytuowac", GetScreenWidth() >> 2, 3 * GetScreenHeight() >> 2, 30, RED);
+        DrawText(TextFormat("Wynik: %i", 10), (GetScreenWidth() >> 1) - (MeasureText(TextFormat("Wynik: %i", 10), 30) / 2), 3 * (GetScreenHeight() >> 2)- 50, 30, (Color) { .r = 33, .g = 24, .b = 190, .a = 255 });
+        DrawText("Kliknij klawisz spacji aby kontytuowac", (GetScreenWidth() >> 1) - (MeasureText("Kliknij klawisz spacji aby kontytuowac", 30) / 2), 3 * (GetScreenHeight() >> 2), 30, (Color) {.r = 47, .g = 78, .b = 37, .a = 255 });
 
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
         }
-        if (GetKeyPressed() != 0) {
+        if (IsKeyPressed(KEY_SPACE)) {
             *state = resumeState;
         }
     } while (*state == EQUIPMENT && !WindowShouldClose());

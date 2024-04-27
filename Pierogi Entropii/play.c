@@ -120,10 +120,10 @@ void play(enum state *state) {
     int interY = 0;
     bool interact = false;
     bool isCentered = false;
+    bool won = false;
 
-    while (!WindowShouldClose() && *state == PLAY) {
+    while (!WindowShouldClose() && *state == PLAY && !won) {
         if (lifetime - time(NULL) + start <= 0) {
-            endScreen(state, MENU, &screenCamera1, &splitScreenRect, player);
             *state = MENU;
         }
         UpdateMusicStream(music);
@@ -202,6 +202,13 @@ void play(enum state *state) {
                             interact = false;
                         }
                         break;
+                    case 4:
+                        DrawRectangle(GetScreenWidth() / 2 - 150, GetScreenHeight() - 50, 300, 50, GREEN);
+                        DrawText("Zakoncz Rozgrywke", (GetScreenWidth() - MeasureText("Zakoncz Rozgrywke", 20)) / 2, GetScreenHeight() - 30, 20, WHITE);
+
+                        if (IsKeyPressed(KEY_X)) {
+                            won = true;
+                        }
                     default:
                         DrawRectangle(GetScreenWidth() / 2 - 150, GetScreenHeight() - 50, 300, 50, GREEN);
                         DrawText("Click x to exit", (GetScreenWidth() - MeasureText("Click x to exit", 20)) / 2, GetScreenHeight() - 30, 20, WHITE);
@@ -361,6 +368,20 @@ void play(enum state *state) {
         if (player.coordinates.y > map[num].height - 2) player.coordinates.y = map[num].height - 2;
 
         map[num].camera.zoom += (GetMouseWheelMove() * map[num].camera.zoom / 16);
+    }
+
+    if (won) {
+        endScreen(state, MENU, &screenCamera1, &splitScreenRect, player);
+    }
+    else {
+        do {
+            UpdateMusicStream(music);
+            BeginDrawing();
+            ClearBackground(RED);
+            DrawText("Przegrales", (GetScreenWidth() - MeasureText("Przegrales", 30)) / 2, (GetScreenHeight() - 30) / 2 + 50, 30, WHITE);
+            DrawText("Nie zdolales dotrzec do czajnika", (GetScreenWidth() - MeasureText("Nie zdolales dotrzec do czajnika", 30)) / 2, (GetScreenHeight() - 30) / 2, 30, WHITE);
+            EndDrawing();
+        } while (GetKeyPressed() == 0);
     }
 
     UnloadMusicStream(music);
