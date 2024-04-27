@@ -14,7 +14,7 @@ Texture2D *LoadPlayer(void) {
 }
 
 Texture2D *LoadFloor(void) {
-    Texture2D *result = malloc(sizeof(Texture2D) * 13);
+    Texture2D *result = malloc(sizeof(Texture2D) * 17);
 
     result[0] = LoadTexture("resources/Fundamenty/floor.png");
     result[1] = LoadTexture("resources/Fundamenty/upperWall.png");
@@ -29,6 +29,10 @@ Texture2D *LoadFloor(void) {
     result[10] = LoadTexture("resources/Fundamenty/DrzwiDolne.png");
     result[11] = LoadTexture("resources/Fundamenty/DrzwiLewe.png");
     result[12] = LoadTexture("resources/Fundamenty/DrzwiGora.png");
+    result[13] = LoadTexture("resources/Fundamenty/OknoDolne.png");
+    result[14] = LoadTexture("resources/Fundamenty/OknoGora.png");
+    result[15] = LoadTexture("resources/Fundamenty/PodlogaHolDark.png");
+    result[16] = LoadTexture("resources/Fundamenty/PodlogaHolJasne.png");
 
     return result;
 }

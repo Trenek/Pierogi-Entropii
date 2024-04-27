@@ -84,15 +84,17 @@ void play(enum state *state) {
             DrawTextureRec(screenCamera1.texture, splitScreenRect, (Vector2) { 0, 0 }, WHITE);
             DrawText(TextFormat("%.2f %.2f", player.coordinates.x, player.coordinates.y), 0, 0, 20, VIOLET);
             if (interact) {
+                DrawText(TextFormat("%i", grid[interY][interX].interactableID), 0, 0, 20, WHITE);
                 switch (grid[interY][interX].interactableID) {
                     case 2:
                         DrawRectangle(GetScreenWidth() / 2 - 100, GetScreenHeight() - 100, 200, 50, GREEN);
                         DrawText("Go to stage 2", GetScreenWidth() / 2 - 80, GetScreenHeight() - 80, 20, WHITE);
-                        if (IsKeyDown(KEY_X)) {
+                        if (IsKeyDown(KEY_Y)) {
                             freeGrid(grid, height);
                             grid = allocGridTile(&width, &height, tekstury, "stage/2.txt", radius, &player);
                             camera = createCamera(width, height, radius);
                         }
+                        break;
                     default:
                         DrawRectangle(GetScreenWidth() / 2 - 100, GetScreenHeight() - 100, 200, 50, GREEN);
                         DrawText("Click x to exit", GetScreenWidth() / 2 - 80, GetScreenHeight() - 80, 20, WHITE);
@@ -101,7 +103,7 @@ void play(enum state *state) {
                         }
                 }
             }
-        EndDrawing();
+            EndDrawing();
 
         if (IsKeyPressed(KEY_P)) {
             Pause(state, PLAY, &screenCamera1, &splitScreenRect);
