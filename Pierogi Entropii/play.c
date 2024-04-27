@@ -163,8 +163,9 @@ void play(enum state *state) {
                         }
                         break;
                     default:
-                        DrawRectangle(GetScreenWidth() / 2 - 100, GetScreenHeight() - 100, 200, 50, GREEN);
-                        DrawText("Click x to exit", GetScreenWidth() / 2 - 80, GetScreenHeight() - 80, 20, WHITE);
+                        DrawRectangle(GetScreenWidth() / 2 - 150, GetScreenHeight() - 50, 300, 50, GREEN);
+                        DrawText("Click x to exit", (GetScreenWidth() - MeasureText("Click x to exit", 20)) / 2, GetScreenHeight() - 30, 20, WHITE);
+
                         if (IsKeyDown(KEY_X)) {
                             *state = EXIT;
                         }
