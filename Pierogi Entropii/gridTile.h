@@ -9,6 +9,7 @@ struct GridTile {
     Texture2D *collectable;
     Texture2D *interactable;
     int interactableID;
+    int exit;
 };
 
 struct GridTile **allocGridTile(int *width, int *height, Texture2D *texture[], const char *file, int radius, struct player *player);

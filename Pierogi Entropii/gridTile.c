@@ -68,6 +68,20 @@ struct GridTile **allocGridTile(int *width, int *height, Texture2D *texture[], c
         }
         i += 1;
     }
+    i = 0;
+    while (i < *height) {
+        j = 0;
+        while (j < *width) {
+            if (result[i][j].interactableID == 2) {
+                fscanf(f, "%i", &k);
+                result[i][j].exit = k;
+
+            }
+
+            j += 1;
+        }
+        i += 1;
+    }
 
     i = 0;
     while (i < *height) {
