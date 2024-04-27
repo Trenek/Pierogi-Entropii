@@ -90,19 +90,19 @@ inline Camera2D createCamera(int width, int height, int radius) {
 Texture2D *LoadFloor(void) {
     Texture2D *result = malloc(sizeof(Texture2D) * 13);
 
-    result[0] = LoadTexture("resources/Fais/floor.png");
-    result[1] = LoadTexture("resources/Fais/upperWall.png");
-    result[2] = LoadTexture("resources/Fais/lowerWall.png");
-    result[3] = LoadTexture("resources/Fais/leftWall.png");
-    result[4] = LoadTexture("resources/Fais/rightWall.png");
-    result[5] = LoadTexture("resources/Fais/leftUpperWall.png");
-    result[6] = LoadTexture("resources/Fais/rightUpperWall.png");
-    result[7] = LoadTexture("resources/Fais/leftLowerWall.png");
-    result[8] = LoadTexture("resources/Fais/rightLowerWall.png");
-    result[9] = LoadTexture("resources/DrzwiPrawe.png");
-    result[10] = LoadTexture("resources/DrzwiDolne.png");
-    result[11] = LoadTexture("resources/DrzwiLewe.png");
-    result[12] = LoadTexture("resources/DrzwiGora.png");
+    result[0] = LoadTexture("resources/Fundamenty/floor.png");
+    result[1] = LoadTexture("resources/Fundamenty/upperWall.png");
+    result[2] = LoadTexture("resources/Fundamenty/lowerWall.png");
+    result[3] = LoadTexture("resources/Fundamenty/leftWall.png");
+    result[4] = LoadTexture("resources/Fundamenty/rightWall.png");
+    result[5] = LoadTexture("resources/Fundamenty/leftUpperWall.png");
+    result[6] = LoadTexture("resources/Fundamenty/rightUpperWall.png");
+    result[7] = LoadTexture("resources/Fundamenty/leftLowerWall.png");
+    result[8] = LoadTexture("resources/Fundamenty/rightLowerWall.png");
+    result[9] = LoadTexture("resources/Fundamenty/DrzwiPrawe.png");
+    result[10] = LoadTexture("resources/Fundamenty/DrzwiDolne.png");
+    result[11] = LoadTexture("resources/Fundamenty/DrzwiLewe.png");
+    result[12] = LoadTexture("resources/Fundamenty/DrzwiGora.png");
 
     return result;
 }
