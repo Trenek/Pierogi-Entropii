@@ -44,9 +44,12 @@ Texture2D *LoadProps(void) {
 }
 
 Texture2D *LoadClickable(void) {
-    Texture2D *result = malloc(sizeof(Texture2D) * 1);
+    Texture2D *result = malloc(sizeof(Texture2D) * 4);
 
-    result[0] = LoadTexture("resources/Collectables/papaj.png");
+    result[0] = LoadTexture("resources/Action/przeszukaj.png");
+    result[1] = LoadTexture("resources/Action/zmienpokoj.png");
+    result[2] = LoadTexture("resources/Action/use.png");
+    result[3] = LoadTexture("resources/Action/DoCzajnika.png");
 
     return result;
 }
@@ -54,7 +57,7 @@ Texture2D *LoadClickable(void) {
 Texture2D *LoadCollectable(void) {
     Texture2D *result = malloc(sizeof(Texture2D) * 1);
 
-    result[0] = LoadTexture("resources/Collectables/papaj.png");
+    result[0] = LoadTexture("resources/Collectables/Pierogi.png");
 
     return result;
 }

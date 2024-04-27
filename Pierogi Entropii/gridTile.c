@@ -58,7 +58,7 @@ struct GridTile **allocGridTile(int *width, int *height, Texture2D *texture[], c
         j = 0;
         while (j < *width) {
             fscanf(f, "%i", &k);
-            if (k != 0) result[i][j].interactable = texture[2]; // + k - 1;
+            if (k != 0) result[i][j].interactable = texture[2] + k - 1;
 
             j += 1;
         }
@@ -70,7 +70,7 @@ struct GridTile **allocGridTile(int *width, int *height, Texture2D *texture[], c
         j = 0;
         while (j < *width) {
             fscanf(f, "%i", &k);
-            if (k != 0) result[i][j].collectable = texture[3]; // + k - 1;
+            if (k != 0) result[i][j].collectable = texture[3] + k - 1;
 
             j += 1;
         }
