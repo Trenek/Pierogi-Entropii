@@ -107,6 +107,10 @@ void play(enum state *state) {
             if (interact) {
                 //DrawText(TextFormat("%i", map[num].grid[interY][interX].interactableID), 0, 0, 20, WHITE);
                 switch (map[num].grid[interY][interX].interactableID) {
+                    case 1:
+                        DrawRectangle(GetScreenWidth() / 2 - 100, GetScreenHeight() - 100, 200, 50, GREEN);
+                        DrawText("Go to other stage", GetScreenWidth() / 2 - 80, GetScreenHeight() - 80, 20, WHITE);
+                        break;
                     case 2:
                         DrawRectangle(GetScreenWidth() / 2 - 100, GetScreenHeight() - 100, 200, 50, GREEN);
                         DrawText("Go to other stage", GetScreenWidth() / 2 - 80, GetScreenHeight() - 80, 20, WHITE);
@@ -121,6 +125,10 @@ void play(enum state *state) {
                                     .height = height,
                                     .width = width
                                 };
+                            }
+                            else {
+                                grid = allocGridTile(&width, &height, tekstury, TextFormat("stage/%i.txt", num), radius, &player);
+                                freeGrid(grid, height);
                             }
                             interact = false;
                         }
