@@ -21,6 +21,7 @@ struct GridTile **allocGridTile(int *width, int *height, Texture2D *texture[], c
     int i = 0;
     int j = 0;
     int k = 0;
+    int m = 0;
 
     while (i < *height) {
         result[i] = malloc(sizeof(struct GridTile) * *width);
@@ -78,7 +79,8 @@ struct GridTile **allocGridTile(int *width, int *height, Texture2D *texture[], c
             if (result[i][j].interactableID == 2) {
                 fscanf(f, "%i", &k);
                 result[i][j].exit = k;
-
+                fscanf(f, "%i %i", &k, &m);
+                result[i][j].expectedCoordinates = (Vector2){ .x = k, .y = m };
             }
 
             j += 1;

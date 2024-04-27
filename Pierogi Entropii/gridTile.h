@@ -3,6 +3,7 @@
 
 struct GridTile {
     Vector2 coordinates;
+    Vector2 expectedCoordinates;
     Color color;
     Texture2D *texture;
     Texture2D *object;
