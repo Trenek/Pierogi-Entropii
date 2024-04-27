@@ -5,6 +5,7 @@
 #include <string.h>
 
 #include <raylib.h>
+#include <raymath.h>
 
 #include "state.h"
 #include "gridTile.h"
@@ -89,8 +90,13 @@ void play(enum state *state) {
     int interX = 0;
     int interY = 0;
     bool interact = false;
+    bool isCentered = false;
 
     while (!WindowShouldClose() && *state == PLAY) {
+        if (isCentered) {
+            map[num].camera.target = Vector2Scale(player.coordinates, radius);
+            if (map[num].camera.zoom <= 5) map[num].camera.zoom = 5;
+        }
         BeginTextureMode(screenCamera1);
             ClearBackground(BROWN);
 
@@ -104,7 +110,7 @@ void play(enum state *state) {
         BeginDrawing();
             ClearBackground(color);
             DrawTextureRec(screenCamera1.texture, splitScreenRect, (Vector2) { 0, 0 }, WHITE);
-            DrawText(TextFormat("LICZBA PIEROGOW - %i", player.pierogi[0]), 0, 0, 20, WHITE);
+            DrawText(TextFormat("ZOOM - %f", map[num].camera.zoom), 0, 0, 20, WHITE);
             if (interact) {
                 //DrawText(TextFormat("%i", map[num].grid[interY][interX].interactableID), 0, 0, 20, WHITE);
                 switch (map[num].grid[interY][interX].interactableID) {
@@ -171,14 +177,25 @@ void play(enum state *state) {
             equipment(state, PLAY, &screenCamera1, &splitScreenRect, player);
         }
 
+
+        float speed = 0.01f;
+        if (IsKeyDown(KEY_LEFT_SHIFT)) {
+            speed *= 4;
+        }
+        if (IsKeyPressed(KEY_Q)) {
+            isCentered = !isCentered;
+            if (!isCentered) {
+                map[num].camera = createCamera(width, height, radius);
+            }
+        }
         if (IsKeyDown(KEY_W)) {
             int x1 = (int)floorf(player.coordinates.x + 0.20);
             int x2 = (int)floorf(player.coordinates.x + 0.8f);
-            int y = (int)floorf(player.coordinates.y - 0.01f + 1.f);
+            int y = (int)floorf(player.coordinates.y - speed + 1.f);
 
             if (map[num].grid[y][x1].object == NULL && map[num].grid[y][x2].object == NULL) {
                 player.orientation = 2;
-                player.coordinates.y -= 0.01f;
+                player.coordinates.y -= speed;
                 if (map[num].grid[y][x1].collectable != NULL) {
                     map[num].grid[y][x1].collectable = NULL;
                     player.pierogi[0] += 1;
@@ -204,11 +221,11 @@ void play(enum state *state) {
         else if (IsKeyDown(KEY_S)) {
             int x1 = (int)floorf(player.coordinates.x + 0.2f);
             int x2 = (int)floorf(player.coordinates.x + 0.8f);
-            int y = (int)floorf(player.coordinates.y + 0.01f + 1.f);
+            int y = (int)floorf(player.coordinates.y + speed + 1.f);
 
             if (map[num].grid[y][x1].object == NULL && map[num].grid[y][x2].object == NULL) {
                 player.orientation = 0;
-                player.coordinates.y += 0.01f;
+                player.coordinates.y += speed;
                 if (map[num].grid[y][x1].collectable != NULL) {
                     map[num].grid[y][x1].collectable = NULL;
                     player.pierogi[0] += 1;
@@ -233,13 +250,13 @@ void play(enum state *state) {
             }
         }
         else if (IsKeyDown(KEY_D)) {
-            int x1 = (int)floorf(player.coordinates.x + 0.01f + 0.2f);
-            int x2 = (int)floorf(player.coordinates.x + 0.01f + 0.8f);
+            int x1 = (int)floorf(player.coordinates.x + speed + 0.2f);
+            int x2 = (int)floorf(player.coordinates.x + speed + 0.8f);
             int y = (int)floorf(player.coordinates.y + 1.f);
 
             if (map[num].grid[y][x1].object == NULL && map[num].grid[y][x2].object == NULL) {
                 player.orientation = 1;
-                player.coordinates.x += 0.01f;
+                player.coordinates.x += speed;
                 if (map[num].grid[y][x1].collectable != NULL) {
                     map[num].grid[y][x1].collectable = NULL;
                     player.pierogi[0] += 1;
@@ -264,13 +281,13 @@ void play(enum state *state) {
             }
         }
         else if (IsKeyDown(KEY_A)) {
-            int x1 = (int)floorf(player.coordinates.x - 0.01f + 0.2f);
-            int x2 = (int)floorf(player.coordinates.x - 0.01f + 0.8f);
+            int x1 = (int)floorf(player.coordinates.x - speed + 0.2f);
+            int x2 = (int)floorf(player.coordinates.x - speed + 0.8f);
             int y = (int)floorf(player.coordinates.y + 1.f);
 
             if (map[num].grid[y][x1].object == NULL && map[num].grid[y][x2].object == NULL) {
                 player.orientation = 3;
-                player.coordinates.x -= 0.01f;
+                player.coordinates.x -= speed;
                 if (map[num].grid[y][x1].collectable != NULL) {
                     map[num].grid[y][x1].collectable = NULL;
                     player.pierogi[0] += 1;
