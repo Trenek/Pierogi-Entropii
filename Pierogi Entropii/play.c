@@ -83,7 +83,7 @@ void play(enum state *state) {
         .height = height,
         .width = width
     };
-    int is[10] = { 0 };
+    int is[100] = { 0 };
     is[1] = 1;
     RenderTexture screenCamera1 = LoadRenderTexture(GetScreenWidth(), GetScreenHeight() + 20);
     Rectangle splitScreenRect = { 0.0f, 0.0f, (float)screenCamera1.texture.width, (float)-screenCamera1.texture.height };
