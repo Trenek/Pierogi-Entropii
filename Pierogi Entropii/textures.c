@@ -13,6 +13,17 @@ Texture2D *LoadPlayer(void) {
     return result;
 }
 
+void UnloadPlayer(Texture2D *texture) {
+    int i = 0;
+
+    while (i < 4) {
+        UnloadTexture(texture[i]);
+        i += 1;
+    }
+
+    free(texture);
+}
+
 Texture2D *LoadFloor(void) {
     Texture2D *result = malloc(sizeof(Texture2D) * 20);
 
@@ -38,6 +49,17 @@ Texture2D *LoadFloor(void) {
     result[19] = LoadTexture("resources/Fundamenty/poreczgoraprawo.png");
 
     return result;
+}
+
+void UnloadFloor(Texture2D *texture) {
+    int i = 0;
+
+    while (i < 20) {
+        UnloadTexture(texture[i]);
+        i += 1;
+    }
+
+    free(texture);
 }
 
 Texture2D *LoadProps(void) {
@@ -76,6 +98,17 @@ Texture2D *LoadProps(void) {
     return result;
 }
 
+void UnloadProps(Texture2D *texture) {
+    int i = 0;
+
+    while (i < 28) {
+        UnloadTexture(texture[i]);
+        i += 1;
+    }
+
+    free(texture);
+}
+
 Texture2D *LoadClickable(void) {
     Texture2D *result = malloc(sizeof(Texture2D) * 4);
 
@@ -87,10 +120,32 @@ Texture2D *LoadClickable(void) {
     return result;
 }
 
+void UnloadClickable(Texture2D *texture) {
+    int i = 0;
+
+    while (i < 4) {
+        UnloadTexture(texture[i]);
+        i += 1;
+    }
+
+    free(texture);
+}
+
 Texture2D *LoadCollectable(void) {
     Texture2D *result = malloc(sizeof(Texture2D) * 1);
 
     result[0] = LoadTexture("resources/Collectables/Pierogi.png");
 
     return result;
+}
+
+void UnloadCollectable(Texture2D *texture) {
+    int i = 0;
+
+    while (i < 1) {
+        UnloadTexture(texture[i]);
+        i += 1;
+    }
+
+    free(texture);
 }

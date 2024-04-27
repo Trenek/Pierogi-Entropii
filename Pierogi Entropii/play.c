@@ -80,6 +80,8 @@ void play(enum state *state) {
     int width = 8;
     int height = 10;
     int radius = 16;
+    time_t start = time(NULL);
+    time_t lifetime = 5 * 60;
 
     Texture *tekstury[] = {
         LoadFloor(),
@@ -89,9 +91,18 @@ void play(enum state *state) {
     };
     struct player player = { .orientation = 0, .texture = LoadPlayer(), .pierogi = { 0 } };
 
+    InitAudioDevice();              // Initialize audio device
+    Music music = LoadMusicStream("resources/mp3/muzyka.mp3");
+    PlayMusicStream(music);
 
     struct map *realMap = malloc(sizeof(struct map) * 100);
     struct map *map = realMap + 1;
+
+    for (int i = 0; i < 100; i += 1) {
+        realMap[i].height = 0;
+        realMap[i].grid = NULL;
+        realMap[i].width = 0;
+    }
 
     struct GridTile **grid = allocGridTile(&width, &height, tekstury, "stage/1.txt", radius, &player);
     int num = 1;
@@ -111,6 +122,11 @@ void play(enum state *state) {
     bool isCentered = false;
 
     while (!WindowShouldClose() && *state == PLAY) {
+        if (lifetime - time(NULL) + start <= 0) {
+            endScreen(state, MENU, &screenCamera1, &splitScreenRect, player);
+            *state = MENU;
+        }
+        UpdateMusicStream(music);
         if (isCentered) {
             map[num].camera.target = Vector2Scale(player.coordinates, radius);
             if (map[num].camera.zoom <= 5) map[num].camera.zoom = 5;
@@ -128,7 +144,8 @@ void play(enum state *state) {
         BeginDrawing();
             ClearBackground(color);
             DrawTextureRec(screenCamera1.texture, splitScreenRect, (Vector2) { 0, 0 }, WHITE);
-            DrawText(TextFormat("ZOOM - %f", map[num].camera.zoom), 0, 0, 20, WHITE);
+            DrawRectangle((GetScreenWidth() - 20 - MeasureText(TextFormat("%3is", lifetime - (time(NULL) - start)), 30)) / 2, 0, MeasureText(TextFormat("%3is", lifetime - (time(NULL) - start)), 30) + 40, 40, VIOLET);
+            DrawText(TextFormat("%3is", lifetime - (time(NULL) - start)), (GetScreenWidth() - MeasureText(TextFormat("%3is", lifetime - (time(NULL) - start)), 30)) / 2, 0, 30, WHITE);
             if (interact) {
                 //DrawText(TextFormat("%i", map[num].grid[interY][interX].interactableID), 0, 0, 20, WHITE);
                 switch (map[num].grid[interY][interX].interactableID) {
@@ -141,6 +158,7 @@ void play(enum state *state) {
                                 int s = map[num].grid[interY][interX].exit - 1;
                                 map[num].grid[interY][interX].exit = 0;
                                 do {
+                                    UpdateMusicStream(music);
                                     BeginDrawing();
                                     ClearBackground(GREEN);
 
@@ -151,6 +169,7 @@ void play(enum state *state) {
                             }
                             else {
                                 do {
+                                    UpdateMusicStream(music);
                                     BeginDrawing();
                                     ClearBackground(RED);
                                     DrawText("Z pustego i Salomon nie naleje", (GetScreenWidth() - MeasureText("Z pustego i Salomon nie naleje", 30)) / 2, (GetScreenHeight() - 30) / 2, 30, WHITE);
@@ -342,5 +361,23 @@ void play(enum state *state) {
         if (player.coordinates.y > map[num].height - 2) player.coordinates.y = map[num].height - 2;
 
         map[num].camera.zoom += (GetMouseWheelMove() * map[num].camera.zoom / 16);
+    }
+
+    UnloadMusicStream(music);
+
+    CloseAudioDevice();         // Close audio device (music streaming is automatically stopped)
+
+    UnloadFloor(tekstury[0]);
+    UnloadProps(tekstury[1]);
+    UnloadClickable(tekstury[2]);
+    UnloadCollectable(tekstury[3]);
+    UnloadPlayer(player.texture);
+    
+    int i = 0;
+    while (i < 100) {
+        if (realMap[i].height != 0)
+        freeGrid(realMap[i].grid, realMap[i].height);
+
+        i += 1;
     }
 }
