@@ -116,16 +116,16 @@ void play(enum state *state) {
                                 map[num].grid[interY][interX].exit = 0;
                                 do {
                                     BeginDrawing();
-                                    ClearBackground(BROWN);
-                                    DrawText("ZNALAZLES PIEROGA!!!", 0, 0, 50, WHITE);
+                                    ClearBackground(GREEN);
+                                    DrawText("ZNALAZLES PIEROGA!!!", (GetScreenWidth() - MeasureText("ZNALAZLES PIEROGA!!!", 50)) / 2, (GetScreenHeight() - 50) / 2, 50, WHITE);
                                     EndDrawing();
                                 } while (GetKeyPressed() == 0);
                             }
                             else {
                                 do {
                                     BeginDrawing();
-                                    ClearBackground(BROWN);
-                                    DrawText("NIE DLA PSA!!!", 0, 0, 50, WHITE);
+                                    ClearBackground(RED);
+                                    DrawText("NIE DLA PSA!!!", (GetScreenWidth() - MeasureText("NIE DLA PSA!!!", 50)) / 2, (GetScreenHeight() - 50) / 2, 50, WHITE);
                                     EndDrawing();
                                 } while (GetKeyPressed() == 0);
                             }
