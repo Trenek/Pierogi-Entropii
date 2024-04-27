@@ -142,15 +142,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="drawMenuElement.c" />
+    <ClCompile Include="gridTile.c" />
     <ClCompile Include="menu.c" />
     <ClCompile Include="pause.c" />
     <ClCompile Include="Pierogi Entropii.c" />
     <ClCompile Include="play.c" />
+    <ClCompile Include="textures.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="drawMenuElement.h" />
+    <ClInclude Include="gridTile.h" />
     <ClInclude Include="isMouseInRange.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="state.h" />
+    <ClInclude Include="textures.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,60 +6,12 @@
 #include <raylib.h>
 
 #include "state.h"
+#include "gridTile.h"
 
 #include "drawMenuElement.h"
+#include "player.h"
 
-struct GridTile {
-    Vector2 coordinates;
-    Color color;
-    Texture2D *texture;
-    Texture2D *object;
-};
-
-struct GridTile **allocGridTile(int *width, int *height, Texture2D *texture[], const char *file, int radius) {
-    FILE *f = fopen(file, "r");
-    int playerX = 0;
-    int playerY = 0;
-    fscanf(f, "%i%i", height, width);
-    fscanf(f, "%i%i", &playerX, &playerY);
-    srand((unsigned int)time(NULL));
-
-    struct GridTile **result = malloc(sizeof(struct GridTile *) * *height);
-    int i = 0;
-    int j = 0;
-    int k = 0;
-
-    while (i < *height) {
-        result[i] = malloc(sizeof(struct GridTile) * *width);
-        j = 0;
-        while (j < *width) {
-            fscanf(f, "%i", &k);
-            result[i][j] = (struct GridTile){
-                .color = { (unsigned char)rand(), (unsigned char)rand(), (unsigned char)rand(), 255 },
-                .coordinates = {.x = j * radius, .y = i * radius },
-                .object = NULL,
-                .texture = texture[0] + k
-            };
-
-            j += 1;
-        }
-
-        i += 1;
-    }
-
-    return result;
-}
-
-void freeGrid(struct GridTile **toFree, int height) {
-    int i = 0;
-
-    while (i < height) {
-        free(toFree[i]);
-        i += 1;
-    }
-
-    free(toFree);
-}
+#include "textures.h"
 
 void paint(struct GridTile **grid, int width, int height) {
     int i = 0;
@@ -70,6 +22,9 @@ void paint(struct GridTile **grid, int width, int height) {
         while (j < width) {
             DrawRectangle((int)grid[i][j].coordinates.x, (int)grid[i][j].coordinates.y, 8, 8, grid[i][j].color);
             DrawTextureEx(*grid[i][j].texture, grid[i][j].coordinates, 0, 1, WHITE);
+            if (grid[i][j].object != NULL) DrawTextureEx(*grid[i][j].object, grid[i][j].coordinates, 0, 1, WHITE);
+            if (grid[i][j].interactable != NULL) DrawTextureEx(*grid[i][j].interactable, grid[i][j].coordinates, 0, 1, WHITE);
+            if (grid[i][j].collectable != NULL) DrawTextureEx(*grid[i][j].collectable, grid[i][j].coordinates, 0, 1, WHITE);
             j += 1;
         }
 
@@ -90,36 +45,6 @@ inline Camera2D createCamera(int width, int height, int radius) {
     };
 }
 
-Texture2D *LoadFloor(void) {
-    Texture2D *result = malloc(sizeof(Texture2D) * 13);
-
-    result[0] = LoadTexture("resources/Fundamenty/floor.png");
-    result[1] = LoadTexture("resources/Fundamenty/upperWall.png");
-    result[2] = LoadTexture("resources/Fundamenty/lowerWall.png");
-    result[3] = LoadTexture("resources/Fundamenty/leftWall.png");
-    result[4] = LoadTexture("resources/Fundamenty/rightWall.png");
-    result[5] = LoadTexture("resources/Fundamenty/leftUpperWall.png");
-    result[6] = LoadTexture("resources/Fundamenty/rightUpperWall.png");
-    result[7] = LoadTexture("resources/Fundamenty/leftLowerWall.png");
-    result[8] = LoadTexture("resources/Fundamenty/rightLowerWall.png");
-    result[9] = LoadTexture("resources/Fundamenty/DrzwiPrawe.png");
-    result[10] = LoadTexture("resources/Fundamenty/DrzwiDolne.png");
-    result[11] = LoadTexture("resources/Fundamenty/DrzwiLewe.png");
-    result[12] = LoadTexture("resources/Fundamenty/DrzwiGora.png");
-
-    return result;
-}
-
-Texture2D *LoadProps(void) {
-    Texture2D *result = malloc(sizeof(Texture2D) * 3);
-
-    result[0] = LoadTexture("resources/Props/chair.png");
-    result[1] = LoadTexture("resources/Props/shelf.png");
-    result[2] = LoadTexture("resources/Props/table.png");
-
-    return result;
-}
-
 void play(enum state *state) {
     Color color = { .r = 100, .g = 100, .b = 100, .a = 255 };
     int width = 8;
@@ -128,13 +53,20 @@ void play(enum state *state) {
 
     Texture *tekstury[] = {
         LoadFloor(),
-        LoadProps()
+        LoadProps(),
+        LoadClickable(),
+        LoadCollectable()
     };
 
-    struct GridTile **grid = allocGridTile(&width, &height, tekstury, "stage/1.txt", radius);
+    struct player player = { .orientation = 0, .texture = LoadPlayer() };
+    struct GridTile **grid = allocGridTile(&width, &height, tekstury, "stage/1.txt", radius, &player);
     Camera2D camera = createCamera(width, height, radius);
     RenderTexture screenCamera1 = LoadRenderTexture(GetScreenWidth(), GetScreenHeight() + 20);
     Rectangle splitScreenRect = { 0.0f, 0.0f, (float)screenCamera1.texture.width, (float)-screenCamera1.texture.height };
+    int interX = 0;
+    int interY = 0;
+    bool interact = false;
+
 
     while (!WindowShouldClose() && *state == PLAY) {
         BeginTextureMode(screenCamera1);
@@ -142,6 +74,7 @@ void play(enum state *state) {
 
             BeginMode2D(camera);
                 paint(grid, width, height);
+                DrawTextureEx(player.texture[player.orientation], (Vector2) { player.coordinates.x * radius, player.coordinates.y * radius }, 0, 1, WHITE);
             EndMode2D();
 
         EndTextureMode();
@@ -149,11 +82,141 @@ void play(enum state *state) {
         BeginDrawing();
             ClearBackground(color);
             DrawTextureRec(screenCamera1.texture, splitScreenRect, (Vector2) { 0, 0 }, WHITE);
+            DrawText(TextFormat("%.2f %.2f", player.coordinates.x, player.coordinates.y), 0, 0, 20, VIOLET);
+            if (interact) {
+                DrawRectangle(GetScreenWidth() / 2 - 100, GetScreenHeight() - 100, 200, 50, GREEN);
+                DrawText("Click x to exit", GetScreenWidth() / 2 - 80, GetScreenHeight() - 80, 20, WHITE);
+                if (IsKeyDown(KEY_X)) {
+                    *state = EXIT;
+                }
+            }
         EndDrawing();
 
         if (IsKeyPressed(KEY_P)) {
             Pause(state, PLAY, &screenCamera1, &splitScreenRect);
         }
+
+        if (IsKeyDown(KEY_W)) {
+            int x1 = (int)floorf(player.coordinates.x + 0.20);
+            int x2 = (int)floorf(player.coordinates.x + 0.8f);
+            int y = (int)floorf(player.coordinates.y - 0.01f + 1.f);
+
+            if (grid[y][x1].object == NULL && grid[y][x2].object == NULL) {
+                player.orientation = 2;
+                player.coordinates.y -= 0.01f;
+                if (grid[y][x1].collectable != NULL) {
+                    grid[y][x1].collectable = NULL;
+                }
+                if (grid[y][x2].collectable != NULL) {
+                    grid[y][x2].collectable = NULL;
+                }
+
+                if (grid[y][x1].interactable != NULL) {
+                    interX = x1;
+                    interY = y;
+                    interact = true;
+                }
+                else if (grid[y][x2].interactable != NULL) {
+                    interX = x2;
+                    interY = y;
+                    interact = true;
+                }
+                else interact = false;
+            }
+        }
+        else if (IsKeyDown(KEY_S)) {
+            int x1 = (int)floorf(player.coordinates.x + 0.2f);
+            int x2 = (int)floorf(player.coordinates.x + 0.8f);
+            int y = (int)floorf(player.coordinates.y + 0.01f + 1.f);
+
+            if (grid[y][x1].object == NULL && grid[y][x2].object == NULL) {
+                player.orientation = 0;
+                player.coordinates.y += 0.01f;
+                if (grid[y][x1].collectable != NULL) {
+                    grid[y][x1].collectable = NULL;
+                }
+
+                if (grid[y][x2].collectable != NULL) {
+                    grid[y][x2].collectable = NULL;
+                }
+
+                if (grid[y][x1].interactable != NULL) {
+                    interX = x1;
+                    interY = y;
+                    interact = true;
+                }
+                else if (grid[y][x2].interactable != NULL) {
+                    interX = x2;
+                    interY = y;
+                    interact = true;
+                }
+                else interact = false;
+            }
+        }
+        else if (IsKeyDown(KEY_D)) {
+            int x1 = (int)floorf(player.coordinates.x + 0.01f + 0.2f);
+            int x2 = (int)floorf(player.coordinates.x + 0.01f + 0.8f);
+            int y = (int)floorf(player.coordinates.y + 1.f);
+
+            if (grid[y][x1].object == NULL && grid[y][x2].object == NULL) {
+                player.orientation = 1;
+                player.coordinates.x += 0.01f;
+                if (grid[y][x1].collectable != NULL) {
+                    grid[y][x1].collectable = NULL;
+                }
+
+                if (grid[y][x2].collectable != NULL) {
+                    grid[y][x2].collectable = NULL;
+                }
+
+                if (grid[y][x1].interactable != NULL) {
+                    interX = x1;
+                    interY = y;
+                    interact = true;
+                }
+                else if (grid[y][x2].interactable != NULL) {
+                    interX = x2;
+                    interY = y;
+                    interact = true;
+                }
+                else interact = false;
+            }
+        }
+        else if (IsKeyDown(KEY_A)) {
+            int x1 = (int)floorf(player.coordinates.x - 0.01f + 0.2f);
+            int x2 = (int)floorf(player.coordinates.x - 0.01f + 0.8f);
+            int y = (int)floorf(player.coordinates.y + 1.f);
+
+            if (grid[y][x1].object == NULL && grid[y][x2].object == NULL) {
+                player.orientation = 3;
+                player.coordinates.x -= 0.01f;
+                if (grid[y][x1].collectable != NULL) {
+                    grid[y][x1].collectable = NULL;
+                }
+
+                if (grid[y][x2].collectable != NULL) {
+                    grid[y][x2].collectable = NULL;
+                }
+
+                if (grid[y][x1].interactable != NULL) {
+                    interX = x1;
+                    interY = y;
+                    interact = true;
+                }
+                else if (grid[y][x2].interactable != NULL) {
+                    interX = x2;
+                    interY = y;
+                    interact = true;
+                }
+                else interact = false;
+            }
+        }
+
+        if (player.coordinates.x + 0.2f < 1) player.coordinates.x = 0.8f;
+        if (player.coordinates.x + 0.8f > width - 1) player.coordinates.x = width - 1 - 0.8f;
+        if (player.coordinates.y + 1.f < 1) player.coordinates.y = 0;
+        if (player.coordinates.y > height - 2) player.coordinates.y = height - 2;
+
         camera.zoom += (GetMouseWheelMove() * camera.zoom / 16);
     }
 

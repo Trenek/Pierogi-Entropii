@@ -22,6 +22,12 @@
     <Filter Include="Pliki źródłowe\additions\drawMenuElement">
       <UniqueIdentifier>{71412e68-78df-46b5-a819-c505efa47b07}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\additions\textures">
+      <UniqueIdentifier>{f51f75ba-3746-48e9-bbc4-142e0c84b63f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\gridTile">
+      <UniqueIdentifier>{81e3ecb8-2621-4f03-ac3b-3901e0157097}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Pierogi Entropii.c">
@@ -39,6 +45,12 @@
     <ClCompile Include="pause.c">
       <Filter>Pliki źródłowe\state</Filter>
     </ClCompile>
+    <ClCompile Include="textures.c">
+      <Filter>Pliki źródłowe\additions\textures</Filter>
+    </ClCompile>
+    <ClCompile Include="gridTile.c">
+      <Filter>Pliki nagłówkowe\gridTile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="state.h">
@@ -48,6 +60,15 @@
       <Filter>Pliki źródłowe\additions\drawMenuElement</Filter>
     </ClInclude>
     <ClInclude Include="isMouseInRange.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="textures.h">
+      <Filter>Pliki źródłowe\additions\textures</Filter>
+    </ClInclude>
+    <ClInclude Include="gridTile.h">
+      <Filter>Pliki nagłówkowe\gridTile</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
