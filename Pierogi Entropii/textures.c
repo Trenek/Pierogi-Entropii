@@ -63,7 +63,7 @@ void UnloadFloor(Texture2D *texture) {
 }
 
 Texture2D *LoadProps(void) {
-    Texture2D *result = malloc(sizeof(Texture2D) * 29);
+    Texture2D *result = malloc(sizeof(Texture2D) * 34);
 
     result[0] = LoadTexture("resources/Props/table.png");
     result[1] = LoadTexture("resources/Props/chair.png");
@@ -94,6 +94,11 @@ Texture2D *LoadProps(void) {
     result[26] = LoadTexture("resources/Props/sofaprawo1.png");
     result[27] = LoadTexture("resources/Props/sofaprawo2.png");
     result[28] = LoadTexture("resources/Props/szafaprawo.png");
+    result[29] = LoadTexture("resources/Props/sciana.png");
+    result[30] = LoadTexture("resources/Props/sofaprzod1.png");
+    result[31] = LoadTexture("resources/Props/sofaprzod2.png");
+    result[32] = LoadTexture("resources/Props/kibel.png");
+    result[33] = LoadTexture("resources/Props/kran.png");
 
     return result;
 }
@@ -132,9 +137,23 @@ void UnloadClickable(Texture2D *texture) {
 }
 
 Texture2D *LoadCollectable(void) {
-    Texture2D *result = malloc(sizeof(Texture2D) * 1);
+    Texture2D *result = malloc(sizeof(Texture2D) * 15);
 
     result[0] = LoadTexture("resources/Collectables/Pierogi.png");
+    result[1] = LoadTexture("resources/Collectables/banan.png");
+    result[2] = LoadTexture("resources/Collectables/eggman.png");
+    result[3] = LoadTexture("resources/Collectables/kielbaMajora.png");
+    result[4] = LoadTexture("resources/Collectables/pyton.png");
+    result[5] = LoadTexture("resources/Collectables/SmellyFisz.png");
+    result[6] = LoadTexture("resources/Collectables/srajtasma.png");
+    result[7] = LoadTexture("resources/Collectables/WBUJ.png");
+    result[8] = LoadTexture("resources/Collectables/WCHUJ.png");
+    result[9] = LoadTexture("resources/Collectables/WFUJ.png");
+    result[10] = LoadTexture("resources/Collectables/WielkiMiecz.png");
+    result[11] = LoadTexture("resources/Collectables/WKIZUJ.png");
+    result[12] = LoadTexture("resources/Collectables/WLUJ.png");
+    result[13] = LoadTexture("resources/Collectables/WMII.png");
+    result[14] = LoadTexture("resources/Collectables/WPUJ.png");
 
     return result;
 }
