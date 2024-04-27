@@ -41,13 +41,31 @@ Texture2D *LoadFloor(void) {
 }
 
 Texture2D *LoadProps(void) {
-    Texture2D *result = malloc(sizeof(Texture2D) * 5);
+    Texture2D *result = malloc(sizeof(Texture2D) * 23);
 
     result[0] = LoadTexture("resources/Props/table.png");
     result[1] = LoadTexture("resources/Props/chair.png");
     result[2] = LoadTexture("resources/Props/shelf.png");
     result[3] = LoadTexture("resources/Props/plant1.png");
     result[4] = LoadTexture("resources/Props/plant2.png");
+    result[5] = LoadTexture("resources/Props/bed1.png");
+    result[6] = LoadTexture("resources/Props/bed2.png");
+    result[7] = LoadTexture("resources/Props/chairleft.png");
+    result[8] = LoadTexture("resources/Props/chairright.png");
+    result[9] = LoadTexture("resources/Props/czajnik.png");
+    result[10] = LoadTexture("resources/Props/fotel.png");
+    result[11] = LoadTexture("resources/Props/kosz1.png");
+    result[12] = LoadTexture("resources/Props/kosz2.png");
+    result[13] = LoadTexture("resources/Props/kosz3.png");
+    result[14] = LoadTexture("resources/Props/krzesloleft.png");
+    result[15] = LoadTexture("resources/Props/maszynajedzenie.png");
+    result[16] = LoadTexture("resources/Props/monitorprzod.png");
+    result[17] = LoadTexture("resources/Props/sofabok1.png");
+    result[18] = LoadTexture("resources/Props/sofabok2.png");
+    result[19] = LoadTexture("resources/Props/stolikgsa.png");
+    result[20] = LoadTexture("resources/Props/stolmonitor.png");
+    result[21] = LoadTexture("resources/Props/stolmonitor2.png");
+    result[22] = LoadTexture("resources/Props/stolowkastol.png");
 
     return result;
 }
