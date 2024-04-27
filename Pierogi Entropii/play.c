@@ -56,6 +56,24 @@ struct map {
     Vector2 position;
 };
 
+const char *znaleziska[] = {
+    "ZNALAZLES PIEROGA!!!",
+    "ZNALAZLES BANANA Z WORMSOW!!!",
+    "ZNALAZLES JAJO Z WASEM!!!",
+    "ZNALAZLES BOZA KIELBASE MAJORA!!!",
+    "ZNALAZLES PAPAJA!!!",
+    "ZNALAZLES PLYTE Z PYTHONEM!!!",
+    "ZNALAZLES RYBE KTORA SMIERDZI (WCALE NIE!)!!!",
+    "ZNALAZLES PAPIER TOALETOWY!!!",
+    "ZNALAZLES DZIEKANA BIOLOGII!!!",
+    "ZNALAZLES DZIEKANA WCHUJ!!!",
+    "ZNALAZLES DZIEKANA FAISUJ!!!",
+    "ZNALAZLES WIELKI MIECZ Z RPG!!!",
+    "ZNALAZLES DZIEKANA ZiKSUJ!!!",
+    "ZNALAZLES DZIEKANA LEKARSKIEGO!!!",
+    "ZNALAZLES DZIEKANA WMiIUJ!!!",
+    "ZNALAZLES DZIEKANA POLONISTYKI!!!",
+};
 
 void play(enum state *state) {
     Color color = { .r = 100, .g = 100, .b = 100, .a = 255 };
@@ -119,12 +137,15 @@ void play(enum state *state) {
                         DrawText("Przeszukaj skrzynke", (GetScreenWidth() - MeasureText("Przeszukaj skrzynke", 20)) / 2, GetScreenHeight() - 30, 20, WHITE);
                         if (IsKeyPressed(KEY_X)) {
                             if (map[num].grid[interY][interX].exit > 0) {
-                                player.pierogi[0] += map[num].grid[interY][interX].exit;
+                                player.pierogi[map[num].grid[interY][interX].exit - 1] += 1;
+                                int s = map[num].grid[interY][interX].exit - 1;
                                 map[num].grid[interY][interX].exit = 0;
                                 do {
                                     BeginDrawing();
                                     ClearBackground(GREEN);
-                                    DrawText("ZNALAZLES PIEROGA!!!", (GetScreenWidth() - MeasureText("ZNALAZLES PIEROGA!!!", 50)) / 2, (GetScreenHeight() - 50) / 2, 50, WHITE);
+
+
+                                    DrawText(znaleziska[s], (GetScreenWidth() - MeasureText(znaleziska[s], 30)) / 2, (GetScreenHeight() - 30) / 2, 30, WHITE);
                                     EndDrawing();
                                 } while (GetKeyPressed() == 0);
                             }
@@ -132,7 +153,7 @@ void play(enum state *state) {
                                 do {
                                     BeginDrawing();
                                     ClearBackground(RED);
-                                    DrawText("Z pustego i Salomon nie naleje", (GetScreenWidth() - MeasureText("Z pustego i Salomon nie naleje", 50)) / 2, (GetScreenHeight() - 50) / 2, 50, WHITE);
+                                    DrawText("Z pustego i Salomon nie naleje", (GetScreenWidth() - MeasureText("Z pustego i Salomon nie naleje", 30)) / 2, (GetScreenHeight() - 30) / 2, 30, WHITE);
                                     EndDrawing();
                                 } while (GetKeyPressed() == 0);
                             }
@@ -201,11 +222,11 @@ void play(enum state *state) {
                 player.coordinates.y -= speed;
                 if (map[num].grid[y][x1].collectable != NULL) {
                     map[num].grid[y][x1].collectable = NULL;
-                    player.pierogi[0] += 1;
+                    player.pierogi[map[num].grid[y][x1].exit] += 1;
                 }
                 if (map[num].grid[y][x2].collectable != NULL) {
                     map[num].grid[y][x2].collectable = NULL;
-                    player.pierogi[0] += 1;
+                    player.pierogi[map[num].grid[y][x1].exit] += 1;
                 }
 
                 if (map[num].grid[y][x1].interactable != NULL) {
@@ -231,12 +252,12 @@ void play(enum state *state) {
                 player.coordinates.y += speed;
                 if (map[num].grid[y][x1].collectable != NULL) {
                     map[num].grid[y][x1].collectable = NULL;
-                    player.pierogi[0] += 1;
+                    player.pierogi[map[num].grid[y][x1].exit] += 1;
                 }
 
                 if (map[num].grid[y][x2].collectable != NULL) {
                     map[num].grid[y][x2].collectable = NULL;
-                    player.pierogi[0] += 1;
+                    player.pierogi[map[num].grid[y][x1].exit] += 1;
                 }
 
                 if (map[num].grid[y][x1].interactable != NULL) {
@@ -262,12 +283,12 @@ void play(enum state *state) {
                 player.coordinates.x += speed;
                 if (map[num].grid[y][x1].collectable != NULL) {
                     map[num].grid[y][x1].collectable = NULL;
-                    player.pierogi[0] += 1;
+                    player.pierogi[map[num].grid[y][x1].exit] += 1;
                 }
 
                 if (map[num].grid[y][x2].collectable != NULL) {
                     map[num].grid[y][x2].collectable = NULL;
-                    player.pierogi[0] += 1;
+                    player.pierogi[map[num].grid[y][x1].exit] += 1;
                 }
 
                 if (map[num].grid[y][x1].interactable != NULL) {
@@ -293,12 +314,12 @@ void play(enum state *state) {
                 player.coordinates.x -= speed;
                 if (map[num].grid[y][x1].collectable != NULL) {
                     map[num].grid[y][x1].collectable = NULL;
-                    player.pierogi[0] += 1;
+                    player.pierogi[map[num].grid[y][x1].exit] += 1;
                 }
 
                 if (map[num].grid[y][x2].collectable != NULL) {
                     map[num].grid[y][x2].collectable = NULL;
-                    player.pierogi[0] += 1;
+                    player.pierogi[map[num].grid[y][x1].exit] += 1;
                 }
 
                 if (map[num].grid[y][x1].interactable != NULL) {
