@@ -112,10 +112,12 @@ struct GridTile **allocGridTile(int *width, int *height, Texture2D *texture[], c
 void freeGrid(struct GridTile **toFree, int height) {
     int i = 0;
 
-    while (i < height) {
-        free(toFree[i]);
-        i += 1;
-    }
+    if (toFree != NULL) {
+        while (i < height) {
+            free(toFree[i]);
+            i += 1;
+        }
 
-    free(toFree);
+        free(toFree);
+    }
 }
