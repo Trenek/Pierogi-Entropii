@@ -222,7 +222,9 @@ void play(enum state *state) {
             EndDrawing();
 
         if (IsKeyPressed(KEY_P)) {
+            time_t begin = time(NULL);
             Pause(state, PLAY, &screenCamera1, &splitScreenRect);
+            start += time(NULL) - begin;
         }
         if (IsKeyPressed(KEY_E)) {
             equipment(state, PLAY, &screenCamera1, &splitScreenRect, player);
