@@ -72,7 +72,7 @@ void play(enum state *state) {
     struct player player = { .orientation = 0, .texture = LoadPlayer(), .pierogi = { 0 } };
 
 
-    struct map *realMap = malloc(sizeof(struct map) * 10);
+    struct map *realMap = malloc(sizeof(struct map) * 100);
     struct map *map = realMap + 1;
 
     struct GridTile **grid = allocGridTile(&width, &height, tekstury, "stage/1.txt", radius, &player);
@@ -143,6 +143,7 @@ void play(enum state *state) {
                         DrawText("Go to other stage", GetScreenWidth() / 2 - 80, GetScreenHeight() - 80, 20, WHITE);
                         if (IsKeyPressed(KEY_X)) {
                             map[num].position = player.coordinates;
+                            map[num].camera = createCamera(width, height, radius);
                             num = map[num].grid[interY][interX].exit;
                             if (is[num] == 0) {
                                 is[num] = 1;
