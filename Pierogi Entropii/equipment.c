@@ -27,12 +27,12 @@ void equipment(enum state *state, enum state resumeState, RenderTexture *screenC
         drawMenuElement(TextFormat("Papaje - %i", player.pierogi[4]), 20, GetScreenWidth() >> 1,                            5 * GetScreenHeight() >> 5, 10, 10, NULL, NULL);
         drawMenuElement(TextFormat("Plyty z pythonem - %i", player.pierogi[5]), 20, GetScreenWidth() >> 1,                  6 * GetScreenHeight() >> 5, 10, 10, NULL, NULL);
         drawMenuElement(TextFormat("Ryba ktora smierdzi (wcale nie!) - %i", player.pierogi[6]), 20, GetScreenWidth() >> 1,  7 * GetScreenHeight() >> 5, 10, 10, NULL, NULL);
-        drawMenuElement(TextFormat("Srajtasma - %i", player.pierogi[7]), 20, GetScreenWidth() >> 1,                         8 * GetScreenHeight() >> 5, 10, 10, NULL, NULL);
+        drawMenuElement(TextFormat("Papier Toaletowy - %i", player.pierogi[7]), 20, GetScreenWidth() >> 1,                         8 * GetScreenHeight() >> 5, 10, 10, NULL, NULL);
         drawMenuElement(TextFormat("Dziekan Biologii - %i", player.pierogi[8]), 20, GetScreenWidth() >> 1,                  9 * GetScreenHeight() >> 5, 10, 10, NULL, NULL);
         drawMenuElement(TextFormat("Dziekan WCHUJu - %i", player.pierogi[9]), 20, GetScreenWidth() >> 1,                    10 * GetScreenHeight() >> 5, 10, 10, NULL, NULL);
-        drawMenuElement(TextFormat("Dziekan Fizyki - %i", player.pierogi[10]), 20, GetScreenWidth() >> 1,                   11 * GetScreenHeight() >> 5, 10, 10, NULL, NULL);
-        drawMenuElement(TextFormat("Wielki Miecz z RPGa - %i", player.pierogi[11]), 20, GetScreenWidth() >> 1,              12 * GetScreenHeight() >> 5, 10, 10, NULL, NULL);
-        drawMenuElement(TextFormat("Dziekan Komunikacji - %i", player.pierogi[12]), 20, GetScreenWidth() >> 1,              13 * GetScreenHeight() >> 5, 10, 10, NULL, NULL);
+        drawMenuElement(TextFormat("Dziekan FAISUJ - %i", player.pierogi[10]), 20, GetScreenWidth() >> 1,                   11 * GetScreenHeight() >> 5, 10, 10, NULL, NULL);
+        drawMenuElement(TextFormat("Wielki Miecz z RPG - %i", player.pierogi[11]), 20, GetScreenWidth() >> 1,              12 * GetScreenHeight() >> 5, 10, 10, NULL, NULL);
+        drawMenuElement(TextFormat("Dziekan ZiKSUJ - %i", player.pierogi[12]), 20, GetScreenWidth() >> 1,              13 * GetScreenHeight() >> 5, 10, 10, NULL, NULL);
         drawMenuElement(TextFormat("Dziekan Lekarski - %i", player.pierogi[13]), 20, GetScreenWidth() >> 1,                 14 * GetScreenHeight() >> 5, 10, 10, NULL, NULL);
         drawMenuElement(TextFormat("Dziekan Matematyki - %i", player.pierogi[14]), 20, GetScreenWidth() >> 1,               15 * GetScreenHeight() >> 5, 10, 10, NULL, NULL);
         drawMenuElement(TextFormat("Dziekan Polonistyki - %i", player.pierogi[15]), 20, GetScreenWidth() >> 1,              16 * GetScreenHeight() >> 5, 10, 10, NULL, NULL);
