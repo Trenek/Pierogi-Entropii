@@ -16,9 +16,12 @@ struct GridTile {
     Texture2D *object;
 };
 
-struct GridTile **allocGridTile(int *width, int *height, Texture2D *texture, const char *file, int radius) {
+struct GridTile **allocGridTile(int *width, int *height, Texture2D *texture[], const char *file, int radius) {
     FILE *f = fopen(file, "r");
+    int playerX = 0;
+    int playerY = 0;
     fscanf(f, "%i%i", height, width);
+    fscanf(f, "%i%i", &playerX, &playerY);
     srand((unsigned int)time(NULL));
 
     struct GridTile **result = malloc(sizeof(struct GridTile *) * *height);
@@ -35,7 +38,7 @@ struct GridTile **allocGridTile(int *width, int *height, Texture2D *texture, con
                 .color = { (unsigned char)rand(), (unsigned char)rand(), (unsigned char)rand(), 255 },
                 .coordinates = {.x = j * radius, .y = i * radius },
                 .object = NULL,
-                .texture = texture + k
+                .texture = texture[0] + k
             };
 
             j += 1;
@@ -107,14 +110,28 @@ Texture2D *LoadFloor(void) {
     return result;
 }
 
+Texture2D *LoadProps(void) {
+    Texture2D *result = malloc(sizeof(Texture2D) * 3);
+
+    result[0] = LoadTexture("resources/Props/chair.png");
+    result[1] = LoadTexture("resources/Props/shelf.png");
+    result[2] = LoadTexture("resources/Props/table.png");
+
+    return result;
+}
+
 void play(enum state *state) {
     Color color = { .r = 100, .g = 100, .b = 100, .a = 255 };
     int width = 8;
     int height = 10;
     int radius = 16;
 
-    Texture2D* podloga = LoadFloor();
-    struct GridTile **grid = allocGridTile(&width, &height, podloga, "stage/1.txt", radius);
+    Texture *tekstury[] = {
+        LoadFloor(),
+        LoadProps()
+    };
+
+    struct GridTile **grid = allocGridTile(&width, &height, tekstury, "stage/1.txt", radius);
     Camera2D camera = createCamera(width, height, radius);
     RenderTexture screenCamera1 = LoadRenderTexture(GetScreenWidth(), GetScreenHeight() + 20);
     Rectangle splitScreenRect = { 0.0f, 0.0f, (float)screenCamera1.texture.width, (float)-screenCamera1.texture.height };
