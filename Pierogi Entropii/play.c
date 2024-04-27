@@ -56,7 +56,7 @@ struct map {
     Vector2 position;
 };
 
-const char *znaleziska[] = {
+const char * const znaleziska[] = {
     "ZNALAZLES PIEROGA!!!",
     "ZNALAZLES BANANA Z WORMSOW!!!",
     "ZNALAZLES JAJO Z WASEM!!!",
