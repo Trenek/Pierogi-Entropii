@@ -137,7 +137,7 @@ void UnloadClickable(Texture2D *texture) {
 }
 
 Texture2D *LoadCollectable(void) {
-    Texture2D *result = malloc(sizeof(Texture2D) * 15);
+    Texture2D *result = malloc(sizeof(Texture2D) * 16);
 
     result[0] = LoadTexture("resources/Collectables/Pierogi.png");
     result[1] = LoadTexture("resources/Collectables/banan.png");
@@ -154,6 +154,7 @@ Texture2D *LoadCollectable(void) {
     result[12] = LoadTexture("resources/Collectables/WLUJ.png");
     result[13] = LoadTexture("resources/Collectables/WMII.png");
     result[14] = LoadTexture("resources/Collectables/WPUJ.png");
+    result[15] = LoadTexture("resources/Collectables/Unity.png");
 
     return result;
 }
