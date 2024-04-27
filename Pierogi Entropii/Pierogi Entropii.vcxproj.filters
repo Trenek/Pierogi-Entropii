@@ -51,6 +51,9 @@
     <ClCompile Include="gridTile.c">
       <Filter>Pliki nagłówkowe\gridTile</Filter>
     </ClCompile>
+    <ClCompile Include="equipment.c">
+      <Filter>Pliki źródłowe\state</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="state.h">

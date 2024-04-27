@@ -52,6 +52,7 @@ struct map {
     Camera2D camera;
     int height;
     int width;
+    Vector2 position;
 };
 
 
@@ -67,7 +68,7 @@ void play(enum state *state) {
         LoadClickable(),
         LoadCollectable()
     };
-    struct player player = { .orientation = 0, .texture = LoadPlayer(), .pierogi = 0 };
+    struct player player = { .orientation = 0, .texture = LoadPlayer(), .pierogi = { 0 } };
 
 
     struct map *realMap = malloc(sizeof(struct map) * 10);
@@ -103,7 +104,7 @@ void play(enum state *state) {
         BeginDrawing();
             ClearBackground(color);
             DrawTextureRec(screenCamera1.texture, splitScreenRect, (Vector2) { 0, 0 }, WHITE);
-            DrawText(TextFormat("LICZBA PIEROGOW - %i", player.pierogi), 0, 0, 20, WHITE);
+            DrawText(TextFormat("LICZBA PIEROGOW - %i", player.pierogi[0]), 0, 0, 20, WHITE);
             if (interact) {
                 //DrawText(TextFormat("%i", map[num].grid[interY][interX].interactableID), 0, 0, 20, WHITE);
                 switch (map[num].grid[interY][interX].interactableID) {
@@ -112,7 +113,7 @@ void play(enum state *state) {
                         DrawText("Przeszukaj skrzynke", GetScreenWidth() / 2 - 80, GetScreenHeight() - 80, 20, WHITE);
                         if (IsKeyPressed(KEY_X)) {
                             if (map[num].grid[interY][interX].exit > 0) {
-                                player.pierogi += map[num].grid[interY][interX].exit;
+                                player.pierogi[0] += map[num].grid[interY][interX].exit;
                                 map[num].grid[interY][interX].exit = 0;
                                 do {
                                     BeginDrawing();
@@ -135,6 +136,7 @@ void play(enum state *state) {
                         DrawRectangle(GetScreenWidth() / 2 - 100, GetScreenHeight() - 100, 200, 50, GREEN);
                         DrawText("Go to other stage", GetScreenWidth() / 2 - 80, GetScreenHeight() - 80, 20, WHITE);
                         if (IsKeyPressed(KEY_X)) {
+                            map[num].position = player.coordinates;
                             num = map[num].grid[interY][interX].exit;
                             if (is[num] == 0) {
                                 is[num] = 1;
@@ -147,8 +149,7 @@ void play(enum state *state) {
                                 };
                             }
                             else {
-                                grid = allocGridTile(&width, &height, tekstury, TextFormat("stage/%i.txt", num), radius, &player);
-                                freeGrid(grid, height);
+                                player.coordinates = map[num].position;
                             }
                             interact = false;
                         }
@@ -166,6 +167,9 @@ void play(enum state *state) {
         if (IsKeyPressed(KEY_P)) {
             Pause(state, PLAY, &screenCamera1, &splitScreenRect);
         }
+        if (IsKeyPressed(KEY_E)) {
+            equipment(state, PLAY, &screenCamera1, &splitScreenRect, player);
+        }
 
         if (IsKeyDown(KEY_W)) {
             int x1 = (int)floorf(player.coordinates.x + 0.20);
@@ -177,11 +181,11 @@ void play(enum state *state) {
                 player.coordinates.y -= 0.01f;
                 if (map[num].grid[y][x1].collectable != NULL) {
                     map[num].grid[y][x1].collectable = NULL;
-                    player.pierogi += 1;
+                    player.pierogi[0] += 1;
                 }
                 if (map[num].grid[y][x2].collectable != NULL) {
                     map[num].grid[y][x2].collectable = NULL;
-                    player.pierogi += 1;
+                    player.pierogi[0] += 1;
                 }
 
                 if (map[num].grid[y][x1].interactable != NULL) {
@@ -207,12 +211,12 @@ void play(enum state *state) {
                 player.coordinates.y += 0.01f;
                 if (map[num].grid[y][x1].collectable != NULL) {
                     map[num].grid[y][x1].collectable = NULL;
-                    player.pierogi += 1;
+                    player.pierogi[0] += 1;
                 }
 
                 if (map[num].grid[y][x2].collectable != NULL) {
                     map[num].grid[y][x2].collectable = NULL;
-                    player.pierogi += 1;
+                    player.pierogi[0] += 1;
                 }
 
                 if (map[num].grid[y][x1].interactable != NULL) {
@@ -238,12 +242,12 @@ void play(enum state *state) {
                 player.coordinates.x += 0.01f;
                 if (map[num].grid[y][x1].collectable != NULL) {
                     map[num].grid[y][x1].collectable = NULL;
-                    player.pierogi += 1;
+                    player.pierogi[0] += 1;
                 }
 
                 if (map[num].grid[y][x2].collectable != NULL) {
                     map[num].grid[y][x2].collectable = NULL;
-                    player.pierogi += 1;
+                    player.pierogi[0] += 1;
                 }
 
                 if (map[num].grid[y][x1].interactable != NULL) {
@@ -269,12 +273,12 @@ void play(enum state *state) {
                 player.coordinates.x -= 0.01f;
                 if (map[num].grid[y][x1].collectable != NULL) {
                     map[num].grid[y][x1].collectable = NULL;
-                    player.pierogi += 1;
+                    player.pierogi[0] += 1;
                 }
 
                 if (map[num].grid[y][x2].collectable != NULL) {
                     map[num].grid[y][x2].collectable = NULL;
-                    player.pierogi += 1;
+                    player.pierogi[0] += 1;
                 }
 
                 if (map[num].grid[y][x1].interactable != NULL) {
