@@ -37,7 +37,7 @@ void timeMenu(enum state *state) {
                 *state = PLAY;
             }
 
-            clickAndChangeState(state, "Back", 20, GetScreenWidth() >> 1, (GetScreenHeight() >> 1) + 200, 10, 10, EXIT);
+            clickAndChangeState(state, "Back", 20, GetScreenWidth() >> 1, (GetScreenHeight() >> 1) + 200, 10, 10, MENU);
         }
     }
 }
