@@ -57,6 +57,9 @@
     <ClCompile Include="time.c">
       <Filter>Pliki źródłowe\state</Filter>
     </ClCompile>
+    <ClCompile Include="endScreen.c">
+      <Filter>Pliki źródłowe\state</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="state.h">

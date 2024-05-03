@@ -10,7 +10,6 @@
 time_t lifetime = 0;
 
 int main(void) {
-    printf("%s", GetWorkingDirectory());
     enum state state = MENU;
     void (*function[])(enum state *state) = {
         [MENU] = menu,

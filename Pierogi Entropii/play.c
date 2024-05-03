@@ -89,7 +89,7 @@ void play(enum state *state) {
         LoadClickable(),
         LoadCollectable()
     };
-    struct player player = { .orientation = 0, .texture = LoadPlayer(), .pierogi = { 0 } };
+    struct player player = { .orientation = 0, .texture = LoadPlayer(), .collectables = { 0 } };
 
     InitAudioDevice();              // Initialize audio device
     Music music = LoadMusicStream("resources/mp3/muzyka.mp3");
@@ -154,7 +154,7 @@ void play(enum state *state) {
                         DrawText("Przeszukaj skrzynke", (GetScreenWidth() - MeasureText("Przeszukaj skrzynke", 20)) / 2, GetScreenHeight() - 30, 20, WHITE);
                         if (IsKeyPressed(KEY_X)) {
                             if (map[num].grid[interY][interX].exit > 0) {
-                                player.pierogi[map[num].grid[interY][interX].exit - 1] += 1;
+                                player.collectables[map[num].grid[interY][interX].exit - 1] += 1;
                                 int s = map[num].grid[interY][interX].exit - 1;
                                 map[num].grid[interY][interX].exit = 0;
                                 do {
@@ -251,11 +251,11 @@ void play(enum state *state) {
                 player.coordinates.y -= speed;
                 if (map[num].grid[y][x1].collectable != NULL) {
                     map[num].grid[y][x1].collectable = NULL;
-                    player.pierogi[map[num].grid[y][x1].exit] += 1;
+                    player.collectables[map[num].grid[y][x1].exit] += 1;
                 }
                 if (map[num].grid[y][x2].collectable != NULL) {
                     map[num].grid[y][x2].collectable = NULL;
-                    player.pierogi[map[num].grid[y][x1].exit] += 1;
+                    player.collectables[map[num].grid[y][x1].exit] += 1;
                 }
 
                 if (map[num].grid[y][x1].interactable != NULL) {
@@ -281,12 +281,12 @@ void play(enum state *state) {
                 player.coordinates.y += speed;
                 if (map[num].grid[y][x1].collectable != NULL) {
                     map[num].grid[y][x1].collectable = NULL;
-                    player.pierogi[map[num].grid[y][x1].exit] += 1;
+                    player.collectables[map[num].grid[y][x1].exit] += 1;
                 }
 
                 if (map[num].grid[y][x2].collectable != NULL) {
                     map[num].grid[y][x2].collectable = NULL;
-                    player.pierogi[map[num].grid[y][x1].exit] += 1;
+                    player.collectables[map[num].grid[y][x1].exit] += 1;
                 }
 
                 if (map[num].grid[y][x1].interactable != NULL) {
@@ -312,12 +312,12 @@ void play(enum state *state) {
                 player.coordinates.x += speed;
                 if (map[num].grid[y][x1].collectable != NULL) {
                     map[num].grid[y][x1].collectable = NULL;
-                    player.pierogi[map[num].grid[y][x1].exit] += 1;
+                    player.collectables[map[num].grid[y][x1].exit] += 1;
                 }
 
                 if (map[num].grid[y][x2].collectable != NULL) {
                     map[num].grid[y][x2].collectable = NULL;
-                    player.pierogi[map[num].grid[y][x1].exit] += 1;
+                    player.collectables[map[num].grid[y][x2].exit] += 1;
                 }
 
                 if (map[num].grid[y][x1].interactable != NULL) {
@@ -343,12 +343,12 @@ void play(enum state *state) {
                 player.coordinates.x -= speed;
                 if (map[num].grid[y][x1].collectable != NULL) {
                     map[num].grid[y][x1].collectable = NULL;
-                    player.pierogi[map[num].grid[y][x1].exit] += 1;
+                    player.collectables[map[num].grid[y][x1].exit] += 1;
                 }
 
                 if (map[num].grid[y][x2].collectable != NULL) {
                     map[num].grid[y][x2].collectable = NULL;
-                    player.pierogi[map[num].grid[y][x1].exit] += 1;
+                    player.collectables[map[num].grid[y][x1].exit] += 1;
                 }
 
                 if (map[num].grid[y][x1].interactable != NULL) {
