@@ -24,6 +24,8 @@ void freeMapArray(struct map map[], int num) {
     while (i < num) {
         if (map[i].height != 0)
         freeGrid(map[i].grid, map[i].height);
+
+        i += 1;
     }
 
     free(map);
