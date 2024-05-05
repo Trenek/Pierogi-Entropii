@@ -146,6 +146,7 @@
     <ClCompile Include="endScreen.c" />
     <ClCompile Include="equipment.c" />
     <ClCompile Include="gridTile.c" />
+    <ClCompile Include="map.c" />
     <ClCompile Include="menu.c" />
     <ClCompile Include="pause.c" />
     <ClCompile Include="Pierogi Entropii.c" />

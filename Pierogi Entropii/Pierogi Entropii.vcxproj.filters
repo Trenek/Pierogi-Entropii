@@ -34,6 +34,9 @@
     <Filter Include="Pliki źródłowe\cancelKey">
       <UniqueIdentifier>{a56e9e23-7349-450b-a1a9-1af5a9a113c8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\map">
+      <UniqueIdentifier>{b7eeeee0-843f-4408-924d-0f3b5a978dab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Pierogi Entropii.c">
@@ -72,6 +75,9 @@
     <ClCompile Include="cancelKey.c">
       <Filter>Pliki źródłowe\cancelKey</Filter>
     </ClCompile>
+    <ClCompile Include="map.c">
+      <Filter>Pliki nagłówkowe\map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="state.h">
@@ -92,9 +98,6 @@
     <ClInclude Include="player.h">
       <Filter>Pliki nagłówkowe\player</Filter>
     </ClInclude>
-    <ClInclude Include="map.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
     <ClInclude Include="createCamera.h">
       <Filter>Pliki źródłowe\additions</Filter>
     </ClInclude>
@@ -103,6 +106,9 @@
     </ClInclude>
     <ClInclude Include="cancelKey.h">
       <Filter>Pliki źródłowe\cancelKey</Filter>
+    </ClInclude>
+    <ClInclude Include="map.h">
+      <Filter>Pliki nagłówkowe\map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

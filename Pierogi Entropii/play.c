@@ -40,14 +40,8 @@ void play(enum state *state) {
     Music music = LoadMusicStream("resources/mp3/muzyka.mp3");
     PlayMusicStream(music);
 
-    struct map *realMap = malloc(sizeof(struct map) * 100);
+    struct map *realMap = allocMapArray(100);
     struct map *map = realMap + 1;
-
-    for (int i = 0; i < 100; i += 1) {
-        realMap[i].height = 0;
-        realMap[i].grid = NULL;
-        realMap[i].width = 0;
-    }
 
     int num = 1;
     struct GridTile **grid = allocGridTile(&width, &height, tekstury, TextFormat("stage/%i.txt", num), radius, &player);
@@ -195,12 +189,5 @@ void play(enum state *state) {
     UnloadClickable(tekstury[2]);
     UnloadCollectable(tekstury[3]);
     UnloadPlayer(player.texture);
-    
-    int i = 0;
-    while (i < 100) {
-        if (realMap[i].height != 0)
-        freeGrid(realMap[i].grid, realMap[i].height);
-
-        i += 1;
-    }
+    freeMapArray(realMap, 100);
 }

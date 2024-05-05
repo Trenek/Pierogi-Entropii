@@ -11,4 +11,7 @@ struct map {
     Vector2 position;
 };
 
+struct map *allocMapArray(int num);
+void freeMapArray(struct map map[], int num);
+
 #endif // !MAP_H
