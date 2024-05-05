@@ -113,7 +113,7 @@ struct GridTile **allocGridTile(int *width, int *height, Texture2D *texture[], c
 }
 
 
-struct GridTile **allocGridTile2(int *width, int *height, Texture2D *texture[], const char *file, int radius, struct player *player) {
+struct GridTile **allocGridTile2(int *width, int *height, Texture2D *texture[], const char *file, int radius) {
     FILE *f = fopen(file, "r");
     fscanf(f, "%i%i", height, width);
 
@@ -221,8 +221,7 @@ void changeStage(struct map *map, struct player *player, int interY, int interX,
     *num = map[*num].grid[interY][interX].exit;
     if (is[*num] == 0) {
         is[*num] = 1;
-        printf("%s", TextFormat("stage/%i.txt", *num));
-        struct GridTile **grid = allocGridTile2(&width, &height, tekstury, TextFormat("stage/%i.txt", *num), radius, player);
+        struct GridTile **grid = allocGridTile2(&width, &height, tekstury, TextFormat("stage/%i.txt", *num), radius);
         map[*num] = (struct map){
             .grid = grid,
             .camera = createCamera(width, height, radius),

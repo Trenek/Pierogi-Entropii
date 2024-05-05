@@ -17,24 +17,8 @@
 
 #include "textures.h"
 
-const char * const znaleziska[] = {
-    "ZNALAZLES PIEROGA!!!",
-    "ZNALAZLES BANANA Z WORMSOW!!!",
-    "ZNALAZLES JAJO Z WASEM!!!",
-    "ZNALAZLES BOZA KIELBASE MAJORA!!!",
-    "ZNALAZLES PLYTE Z PYTHONEM!!!",
-    "ZNALAZLES RYBE KTORA SMIERDZI (WCALE NIE!)!!!",
-    "ZNALAZLES PAPIER TOALETOWY!!!",
-    "ZNALAZLES DZIEKANA BIOLOGII!!!",
-    "ZNALAZLES DZIEKANA WCHUJ!!!",
-    "ZNALAZLES DZIEKANA FAISUJ!!!",
-    "ZNALAZLES WIELKI MIECZ Z RPG!!!",
-    "ZNALAZLES DZIEKANA ZiKSUJ!!!",
-    "ZNALAZLES DZIEKANA LEKARSKIEGO!!!",
-    "ZNALAZLES DZIEKANA WMiIUJ!!!",
-    "ZNALAZLES DZIEKANA POLONISTYKI!!!",
-    "ZNALAZLES UNITY"
-};
+#include "collectablesStrings.h"
+#include "cancelKey.h"
 
 void play(enum state *state) {
     extern time_t lifetime;
@@ -125,7 +109,9 @@ void play(enum state *state) {
 
                         if (IsKeyPressed(KEY_X)) {
                             changeStage(map, &player, interY, interX, tekstury, is, &num);
-                            interact = false;
+                            cancelKey(KEY_X);
+                            interY = (int)player.coordinates.y;
+                            interX = (int)player.coordinates.x;
                         }
                         break;
                     case 4:
@@ -134,13 +120,6 @@ void play(enum state *state) {
 
                         if (IsKeyPressed(KEY_X)) {
                             won = true;
-                        }
-                    default:
-                        DrawRectangle(GetScreenWidth() / 2 - 150, GetScreenHeight() - 50, 300, 50, GREEN);
-                        DrawText("Click x to exit", (GetScreenWidth() - MeasureText("Click x to exit", 20)) / 2, GetScreenHeight() - 30, 20, WHITE);
-
-                        if (IsKeyDown(KEY_X)) {
-                            *state = EXIT;
                         }
                 }
             }
@@ -171,6 +150,7 @@ void play(enum state *state) {
                 } while (GetKeyPressed() == 0);
             }
             getItem = false;
+            cancelKey(KEY_X);
         }
 
         if (IsKeyPressed(KEY_P)) {

@@ -13,7 +13,7 @@ bool static check(struct player *player, struct map map, int x1, int x2, int y, 
     }
     if (map.grid[y][x2].collectable != NULL) {
         map.grid[y][x2].collectable = NULL;
-        player->collectables[map.grid[y][x1].exit] += 1;
+        player->collectables[map.grid[y][x2].exit] += 1;
     }
 
     if (map.grid[y][x1].interactable != NULL) {

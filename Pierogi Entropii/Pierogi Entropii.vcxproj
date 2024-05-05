@@ -108,7 +108,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
-      <DisableSpecificWarnings>5045; 4820; 4100; 4244; 4711; 4710</DisableSpecificWarnings>
+      <DisableSpecificWarnings>5045; 4820; 4244</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,7 +129,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
-      <DisableSpecificWarnings>5045; 4820; 4100; 4244; 4711; 4710</DisableSpecificWarnings>
+      <DisableSpecificWarnings>5045; 4820; 4244</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cancelKey.c" />
     <ClCompile Include="drawMenuElement.c" />
     <ClCompile Include="endScreen.c" />
     <ClCompile Include="equipment.c" />
@@ -154,6 +155,8 @@
     <ClCompile Include="time.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cancelKey.h" />
+    <ClInclude Include="collectablesStrings.h" />
     <ClInclude Include="createCamera.h" />
     <ClInclude Include="drawMenuElement.h" />
     <ClInclude Include="gridTile.h" />
