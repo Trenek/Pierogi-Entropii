@@ -149,13 +149,16 @@
     <ClCompile Include="pause.c" />
     <ClCompile Include="Pierogi Entropii.c" />
     <ClCompile Include="play.c" />
+    <ClCompile Include="player.c" />
     <ClCompile Include="textures.c" />
     <ClCompile Include="time.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="createCamera.h" />
     <ClInclude Include="drawMenuElement.h" />
     <ClInclude Include="gridTile.h" />
     <ClInclude Include="isMouseInRange.h" />
+    <ClInclude Include="map.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="textures.h" />

@@ -28,6 +28,9 @@
     <Filter Include="Pliki nagłówkowe\gridTile">
       <UniqueIdentifier>{81e3ecb8-2621-4f03-ac3b-3901e0157097}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\player">
+      <UniqueIdentifier>{9c3ee835-a958-44bf-bcaf-be787de92f8b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Pierogi Entropii.c">
@@ -60,6 +63,9 @@
     <ClCompile Include="endScreen.c">
       <Filter>Pliki źródłowe\state</Filter>
     </ClCompile>
+    <ClCompile Include="player.c">
+      <Filter>Pliki nagłówkowe\player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="state.h">
@@ -78,7 +84,13 @@
       <Filter>Pliki nagłówkowe\gridTile</Filter>
     </ClInclude>
     <ClInclude Include="player.h">
+      <Filter>Pliki nagłówkowe\player</Filter>
+    </ClInclude>
+    <ClInclude Include="map.h">
       <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="createCamera.h">
+      <Filter>Pliki źródłowe\additions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
