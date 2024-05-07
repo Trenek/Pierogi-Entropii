@@ -16,6 +16,7 @@ void timeMenu(enum state *state) {
         BeginDrawing();
         ClearBackground(color);
 
+        drawTitle("Wybierz limit czasowy", 60, GetScreenWidth() >> 1, GetScreenHeight() >> 4, 10, 10, NULL, NULL);
         drawMenuElement("1 Minuta", 20, GetScreenWidth() >> 1, (GetScreenHeight() >> 1), 10, 10, &color2, &color3);
         drawMenuElement("2 Minuty", 20, GetScreenWidth() >> 1, (GetScreenHeight() >> 1) + 50, 10, 10, &color2, &color3);
         drawMenuElement("5 Minut", 20, GetScreenWidth() >> 1, (GetScreenHeight() >> 1) + 100, 10, 10, &color2, &color3);

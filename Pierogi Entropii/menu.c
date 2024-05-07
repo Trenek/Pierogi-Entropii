@@ -15,6 +15,7 @@ void menu(enum state *state) {
         BeginDrawing();
             ClearBackground(color);
 
+            drawTitle("Piegori Entropii", 60, GetScreenWidth() >> 1, GetScreenHeight() >> 4, 10, 10, NULL, NULL);
             drawMenuElement("Play", 20, GetScreenWidth() >> 1, GetScreenHeight() >> 1, 10, 10, &color2, &color3);
             drawMenuElement("Exit", 20, GetScreenWidth() >> 1, (GetScreenHeight() >> 1) + 200, 10, 10, &color2, &color3);
         EndDrawing();

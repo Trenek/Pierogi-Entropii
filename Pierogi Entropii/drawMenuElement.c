@@ -2,6 +2,18 @@
 
 #include "isMouseInRange.h"
 
+void drawTitle(const char *text, int frontSize, int x, int y, int incX, int incY, Color *color, Color *newColor) {
+    if (isMouseInRange(x, y, incX, incY, frontSize, text)) {
+        color = newColor;
+    }
+
+    x -= MeasureText(text, frontSize) >> 1;
+
+    if (color != NULL) DrawRectangle(x - incX, y - incY, MeasureText(text, frontSize) + (incX << 1), frontSize + (incY << 1), *color);
+
+    DrawText(text, x, y, frontSize, BLACK);
+}
+
 void drawMenuElement(const char *text, int frontSize, int x, int y, int incX, int incY, Color *color, Color *newColor) {
     if (isMouseInRange(x, y, incX, incY, frontSize, text)) {
         color = newColor;
