@@ -1,0 +1,1 @@
+void cancelKey(int KEY);
